@@ -1,34 +1,14 @@
-/*$(function() {
-    $(".step").hide();
-    $(".step1").show();
-    $(".step .btn.next").bind("click", function(e) {
-        $(this).parents(".step").hide();
-        $(this).parents(".step").next().show();
-    });
-    $(".step .btn.prev").bind("click", function(e) {
-        $(this).parents(".step").hide();
-        $(this).parents(".step").prev().show();
-    });
-    $(".step .btn.restart").bind("click", function(e) {
-        $(this).parents(".step").hide();
-        $(".step2").show();
-    });
-});
-*/
-
 $(function() {
     $(".step").hide();
     $(".step-controls .btn.restart").hide();
     $(".step-controls").hide();
     $(".step:first").show();
-    
     //initial next button
     $(".step .btn.next").bind("click", function(e) {
         $(this).parents(".step").hide();
         $(this).parents(".step").next().show();
         $(".step-controls").show();
     });
-    
     //next button
     $(".step-controls .btn.next").bind("click", function(e) {
         var $step = $(".step:visible").hide().next().show();
@@ -37,7 +17,6 @@ $(function() {
             $(".step-controls .btn.restart").show();
         }
     });
-    
     //previous button
     $(".step-controls .btn.prev").bind("click", function(e) {
         var $step = $(".step:visible").hide().prev().show();
@@ -48,7 +27,6 @@ $(function() {
             $(".step-controls .btn.next").show();
         }
     });
-    
     //reset button
     $(".step-controls .btn.restart").bind("click", function(e) {
         $(".step:visible").hide();

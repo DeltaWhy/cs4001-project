@@ -4,7 +4,10 @@
         "image": "atlanta.jpg",
         "population": "42,570 (est. 2012)",
         "size": "24,000 sq. mi.",
-        "homeless-total": 55
+        "homeless-total": 55,
+        "homeless-proportion": 20,
+        "homeless-density": 5,
+        "laws": "This space will provide a summary of the laws governing homeless shelters. We can also provide links here to more detailed info on laws and on existing shelters."
     },
     "barcelona": {
         "name": "Barcelona, Spain",

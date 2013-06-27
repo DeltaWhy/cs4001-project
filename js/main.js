@@ -38,17 +38,20 @@ $(function() {
 
 //form initialization
 $(function() {
+    var select;
+    select = $(".step").eq(1).find("select");
     $.getJSON("data/cities.json").done(function(data) {
         $(".step").eq(1).data("stat-set",data);
+        $.each(data, function(id,city) {$(select).append("<option value='"+id+"'>"+city.name+"</option>");})
+        $(select).change();
     });
-    $(".step").eq(1).find("input").bind("click", function(e) {
+    $(select).change(function() {
         updateStats($(this).parents(".step"), this.value);
-    });
+    }); 
 });
 
 function updateStats(step, key) {
         var data = $(step).data("stat-set")[key];
-        console.log($(step).data("stat-set"));
         $(step).find("img").attr("src", "img/"+data["image"]);
         $(step).find(".stat-value").each(function(ind, stat) {
             $(stat).html(data[$(stat).data("stat-type")]);

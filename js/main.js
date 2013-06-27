@@ -35,3 +35,22 @@ $(function() {
         $(".step-controls .btn.next").show();
     });
 });
+
+//form initialization
+$(function() {
+    $.getJSON("data/cities.json").done(function(data) {
+        $(".step").eq(1).data("stat-set",data);
+    });
+    $(".step").eq(1).find("input").bind("click", function(e) {
+        updateStats($(this).parents(".step"), this.value);
+    });
+});
+
+function updateStats(step, key) {
+        var data = $(step).data("stat-set")[key];
+        console.log($(step).data("stat-set"));
+        $(step).find("img").attr("src", "img/"+data["image"]);
+        $(step).find(".stat-value").each(function(ind, stat) {
+            $(stat).html(data[$(stat).data("stat-type")]);
+        });
+}

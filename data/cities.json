@@ -1,0 +1,16 @@
+{
+    "atlanta": {
+        "name": "Atlanta, Georgia",
+        "image": "atlanta.jpg",
+        "population": "42,570 (est. 2012)",
+        "size": "24,000 sq. mi.",
+        "homeless-total": 55
+    },
+    "barcelona": {
+        "name": "Barcelona, Spain",
+        "image": "barcelona.jpg",
+        "population": 1000,
+        "size": 50,
+        "homeless-total": 55
+    }
+}

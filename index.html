@@ -57,7 +57,7 @@
                     spaces could become temporary homeless shelters, providing a safe place for the
                     homeless at very low cost? How practical would such a project be? What risks
                     would it involve?</p>
-                    <p><a class="btn btn-primary btn-large next">Next &raquo;</a></p>
+                    <p><a class="btn btn-primary btn-large next">Get Started &raquo;</a></p>
                 </div>
             </div>
 
@@ -72,11 +72,11 @@
                         <form class="form">
                             <fieldset>
                                 <label>
-                                    <input type="radio" name="city" value="Atlanta" checked="checked">
+                                    <input type="radio" name="city" value="atlanta" checked="checked">
                                     Atlanta
                                 </label>
                                 <label>
-                                    <input type="radio" name="city" value="Barcelona">
+                                    <input type="radio" name="city" value="barcelona">
                                     Barcelona
                                 </label>
                             </fieldset>
@@ -88,18 +88,18 @@
                         <h3>Statistics</h3>
                         <dl>
                             <dt>Population</dt>
-                            <dd>1 trillion</dd>
+                            <dd class="stat-value" data-stat-type="population">1 trillion</dd>
                             <dt>Size</dt>
-                            <dd>1 million sq. mi.</dd>
+                            <dd class="stat-value" data-stat-type="size">1 million sq. mi.</dd>
                             <dt>Number of homeless</dt>
-                            <dd>1 billion and 1</dd>
+                            <dd class="stat-value" data-stat-type="homeless-total">1 billion and 1</dd>
                             <dt>Homeless people per 1,000 residents</dt>
-                            <dd>1</dd>
+                            <dd class="stat-value" data-stat-type="homeless-proportion">1</dd>
                             <dt>Homeless people per square mile</dt>
-                            <dd>1000</dd>
+                            <dd class="stat-value" data-stat-type="homeless-density">1000</dd>
                         </dl>
                         <h3>Laws</h3>
-                        <p>This space will provide a summary of the laws governing homeless
+                        <p class="stat-value" data-stat-type="laws">This space will provide a summary of the laws governing homeless
                         shelters. We can also provide links here to more detailed info on laws and
                         on existing shelters.</p>
                     </div>
@@ -116,7 +116,8 @@
                     <div class="span4">
                         <form class="form">
                             <select>
-                                <option>Klaus</option>
+                                <option value="gt-klaus">Klaus</option>
+                                <option value="gt-culc">CULC</option>
                             </select>
                         </form>
                         <img class="img-polaroid" src="img/gt-klaus.jpg" width="100%" />

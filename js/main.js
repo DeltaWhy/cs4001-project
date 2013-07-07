@@ -1,8 +1,14 @@
 //page setup
 $(function() {
     $(".page").hide();
-    $(".page").eq(0).show();
-    $(".nav li").eq(0).addClass("active");
+    if (location.hash) {
+        $(location.hash).show();
+        $(".nav a[href="+location.hash+"]").parents("li").addClass("active");
+        changePage(location.hash);
+    } else {
+        $(".page").eq(0).show();
+        $(".nav li").eq(0).addClass("active");
+    }
     $(".nav a").bind("click", function(e) {
         $(".page").hide();
         var id = $(e.target).attr("href");
@@ -31,28 +37,39 @@ function changePage(page) {
 function initSteps() {
     $(".step").hide();
     $(".step-controls .btn.restart").hide();
-    $(".step-controls").hide();
+    $(".step-controls").show();
+    $(".step-controls .btn.prev").hide();
     $(".step:first").show();
-    //initial next button
-    $(".step .btn.next").bind("click", function(e) {
-        $(this).parents(".step").hide();
-        $(this).parents(".step").next().show();
-        $(".step-controls").show();
-    });
     //next button
     $(".step-controls .btn.next").bind("click", function(e) {
         var $step = $(".step:visible").hide().next().show();
-        if ($step.is(".step:last")) {
+        if ($step.is(".step:first")) {
+            $(".step-controls .btn.prev").hide();
+            $(".step-controls .btn.restart").hide();
             $(".step-controls .btn.next").hide();
+        } else if ($step.is(".step:last")) {
+            $(".step-controls .btn.prev").show();
             $(".step-controls .btn.restart").show();
+            $(".step-controls .btn.next").hide();
+        } else {
+            $(".step-controls .btn.prev").show();
+            $(".step-controls .btn.restart").hide();
+            $(".step-controls .btn.next").show();
         }
     });
     //previous button
     $(".step-controls .btn.prev").bind("click", function(e) {
         var $step = $(".step:visible").hide().prev().show();
         if ($step.is(".step:first")) {
-            $(".step-controls").hide();
-        } else if ($step.next().is(".step:last")) {
+            $(".step-controls .btn.prev").hide();
+            $(".step-controls .btn.restart").hide();
+            $(".step-controls .btn.next").hide();
+        } else if ($step.is(".step:last")) {
+            $(".step-controls .btn.prev").show();
+            $(".step-controls .btn.restart").show();
+            $(".step-controls .btn.next").hide();
+        } else {
+            $(".step-controls .btn.prev").show();
             $(".step-controls .btn.restart").hide();
             $(".step-controls .btn.next").show();
         }
@@ -60,7 +77,8 @@ function initSteps() {
     //reset button
     $(".step-controls .btn.restart").bind("click", function(e) {
         $(".step:visible").hide();
-        $(".step").eq(1).show();
+        $(".step").eq(0).show();
+        $(".step-controls .btn.prev").hide();
         $(".step-controls .btn.restart").hide();
         $(".step-controls .btn.next").show();
     });
@@ -71,9 +89,9 @@ function initSteps() {
 //form initialization
 function initForms() {
     var select;
-    select = $(".step").eq(1).find("select");
+    select = $(".step").eq(0).find("select");
     $.getJSON("data/cities.json").done(function(data) {
-        $(".step").eq(1).data("stat-set",data);
+        $(".step").eq(0).data("stat-set",data);
         $.each(data, function(id,city) {$(select).append("<option value='"+id+"'>"+city.name+"</option>");})
         $(select).change();
     });

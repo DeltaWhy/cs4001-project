@@ -28,35 +28,33 @@ $(function() {
     });
 
     initForms();
+    initSteps();
 });
 
 function changePage(page) {
     if (page == "#simulation") {
-        initSteps();
+        resetSteps();
     }
 }
 
-function initSteps() {
+function resetSteps() {
     $(".step").hide();
-    $(".step-controls .btn.restart").hide();
-    $(".step-controls").show();
-    $(".step-controls .btn.prev").hide();
     $(".step:first").show();
+    $(".step-controls .btn.restart").hide();
+    $(".step-controls .btn.prev").hide();
+}
+
+function initSteps() {
+    resetSteps();
     //next button
     $(".step-controls .btn.next").bind("click", function(e) {
         var $step = $(".step:visible").hide().next().show();
-        if ($step.is(".step:first")) {
-            $(".step-controls .btn.prev").hide();
-            $(".step-controls .btn.restart").hide();
-            $(".step-controls .btn.next").hide();
-        } else if ($step.is(".step:last")) {
+        if ($step.prev().is(".step:first")) {
             $(".step-controls .btn.prev").show();
+        } 
+        if ($step.is(".step:last")) {
+            $(".step-controls .btn.next").hide();
             $(".step-controls .btn.restart").show();
-            $(".step-controls .btn.next").hide();
-        } else {
-            $(".step-controls .btn.prev").show();
-            $(".step-controls .btn.restart").hide();
-            $(".step-controls .btn.next").show();
         }
     });
     //previous button
@@ -64,14 +62,8 @@ function initSteps() {
         var $step = $(".step:visible").hide().prev().show();
         if ($step.is(".step:first")) {
             $(".step-controls .btn.prev").hide();
-            $(".step-controls .btn.restart").hide();
-            $(".step-controls .btn.next").hide();
-        } else if ($step.is(".step:last")) {
-            $(".step-controls .btn.prev").show();
-            $(".step-controls .btn.restart").show();
-            $(".step-controls .btn.next").hide();
-        } else {
-            $(".step-controls .btn.prev").show();
+        } 
+        if ($step.next().is(".step:last")) {
             $(".step-controls .btn.restart").hide();
             $(".step-controls .btn.next").show();
         }

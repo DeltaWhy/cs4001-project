@@ -1,4 +1,34 @@
+//page setup
 $(function() {
+    $(".page").hide();
+    $(".page").eq(0).show();
+    $(".nav li").eq(0).addClass("active");
+    $(".nav a").bind("click", function(e) {
+        $(".page").hide();
+        var id = $(e.target).attr("href");
+        $(id).show();
+        $(".nav li").removeClass("active");
+        $(e.target).parents("li").addClass("active");
+        changePage(id);
+    });
+    $(".next-page").bind("click", function(e) {
+        var curPage = $(e.target).parents(".page");
+        $(".page").hide();
+        var curNav = $(".nav li.active");
+        $(".nav li").removeClass("active");
+        curPage.next(".page").show();
+        curNav.next("li").addClass("active");
+        changePage("#" + curPage.next(".page").attr("id"));
+    });
+});
+
+function changePage(page) {
+    if (page == "#simulation") {
+        initSteps();
+    }
+}
+
+function initSteps() {
     $(".step").hide();
     $(".step-controls .btn.restart").hide();
     $(".step-controls").hide();
@@ -34,10 +64,12 @@ $(function() {
         $(".step-controls .btn.restart").hide();
         $(".step-controls .btn.next").show();
     });
-});
+
+    initForms();
+}
 
 //form initialization
-$(function() {
+function initForms() {
     var select;
     select = $(".step").eq(1).find("select");
     $.getJSON("data/cities.json").done(function(data) {
@@ -48,7 +80,7 @@ $(function() {
     $(select).change(function() {
         updateStats($(this).parents(".step"), this.value);
     }); 
-});
+}
 
 //AJAX page switching
 /*$(function() {
@@ -59,9 +91,9 @@ $(function() {
 });*/
 
 function updateStats(step, key) {
-        var data = $(step).data("stat-set")[key];
-        $(step).find("img").attr("src", "img/"+data["image"]);
-        $(step).find(".stat-value").each(function(ind, stat) {
-            $(stat).html(data[$(stat).data("stat-type")]);
-        });
+    var data = $(step).data("stat-set")[key];
+    $(step).find("img").attr("src", "img/"+data["image"]);
+    $(step).find(".stat-value").each(function(ind, stat) {
+        $(stat).html(data[$(stat).data("stat-type")]);
+    });
 }

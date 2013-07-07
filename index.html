@@ -26,12 +26,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="index.html">/tmp/home</a>
+                    <a class="brand" href="#the-problem">/tmp/home</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
-                            <li><a href="index.html">Simulation</a></li>
-                            <li><a href="resources.html">Resources</a></li>
-                            <li><a href="about.html">About</a></li>
+                            <li><a href="#the-problem">The problem</a></li>
+                            <li><a href="#the-solution">The solution?</a></li>
+                            <li><a href="#simulation">Simulation</a></li>
+                            <li><a href="#resources">Resources</a></li>
+                            <li><a href="#about">About</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -39,116 +41,136 @@
         </div>
 
         <div class="container" id="container">
+            <noscript>
+                This site requires Javascript.
+            </noscript>
+            <div class="page" id="the-problem">
+                <h1>The problem</h1>
+                <p><a class="next-page" href="#">The solution?</a></p>
+            </div>
+            <div class="page" id="the-solution">
+                <h1>The solution?</h1>
+                <p><a class="next-page" href="#">Simulation</a></p>
+            </div>
+            <div class="page" id="simulation">
+                <div class="step">
+                    <div class="hero-unit">
+                        <p>There are over 21,000 homeless people in the city of Atlanta. Meanwhile,
+                        office buildings across the city sit empty every night, often with lights and
+                        air conditioning left on, while thousands sleep on the streets. What if these
+                        spaces could become temporary homeless shelters, providing a safe place for the
+                        homeless at very low cost? How practical would such a project be? What risks
+                        would it involve?</p>
+                        <p><a class="btn btn-primary btn-large next">Get Started &raquo;</a></p>
+                    </div>
+                </div>
 
-            <div class="step">
-                <div class="hero-unit">
-                    <p>There are over 21,000 homeless people in the city of Atlanta. Meanwhile,
-                    office buildings across the city sit empty every night, often with lights and
-                    air conditioning left on, while thousands sleep on the streets. What if these
-                    spaces could become temporary homeless shelters, providing a safe place for the
-                    homeless at very low cost? How practical would such a project be? What risks
-                    would it involve?</p>
-                    <p><a class="btn btn-primary btn-large next">Get Started &raquo;</a></p>
+                <div class="step">
+                    <div class="row">
+                        <div class="span4">
+                            <h2>City</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span4">
+                            <form class="form">
+                                <select></select>
+                            </form>
+                            <img class="img-polaroid" src="img/atlanta.jpg" width="100%" />
+                            <p>&nbsp;</p>
+                        </div>
+                        <div class="span8">
+                            <h3>Statistics</h3>
+                            <dl>
+                                <dt>Population</dt>
+                                <dd class="stat-value" data-stat-type="population"></dd>
+                                <dt>Size</dt>
+                                <dd class="stat-value" data-stat-type="size"></dd>
+                                <dt>Number of homeless</dt>
+                                <dd class="stat-value" data-stat-type="homeless-total"></dd>
+                                <dt>Homeless people per 1,000 residents</dt>
+                                <dd class="stat-value" data-stat-type="homeless-proportion"></dd>
+                                <dt>Homeless people per square mile</dt>
+                                <dd class="stat-value" data-stat-type="homeless-density"></dd>
+                            </dl>
+                            <h3>Laws</h3>
+                            <p class="stat-value" data-stat-type="laws"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="row">
+                        <div class="span4">
+                            <h2>Building</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span4">
+                            <form class="form">
+                                <select>
+                                    <option value="gt-klaus">Klaus</option>
+                                    <option value="gt-culc">CULC</option>
+                                </select>
+                            </form>
+                            <img class="img-polaroid" src="img/gt-klaus.jpg" width="100%" />
+                            <p>&nbsp;</p>
+                        </div>
+                        <div class="span8">
+                            <form class="form">
+                                <label>Available square footage</label>
+                                <input type="text" value="10000">
+                                <label>Max. occupancy</label>
+                                <input type="text" value="1000">
+                                <label>Cost of utilities</label>
+                                <input type="text" value="$50">
+                                <label>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="row">
+                        <div class="span4">
+                            <h2>Simulation</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span8">
+                            <form class="form">
+                                <label>Hours per night</label>
+                                <input type="text" value="8">
+                                <label>Nights per week</label>
+                                <input type="text" value="5">
+                                <label>Residents per night</label>
+                                <input type="text" value="50">
+                                <label>Risk tolerance</label>
+                                <select>
+                                    <option>Medium</option>
+                                </select>
+                            </form>
+                        </div>
+                        <div class="span4">
+                            <p>This space will show the results of the simulation.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row step-controls">
+                    <div class="span12">
+                        <a class="btn btn-primary pull-left prev">&laquo; Previous</a>
+                        <a class="btn btn-primary pull-right next">Next &raquo;</a>
+                        <a class="btn btn-primary pull-right restart">Start over</a>
+                    </div>
                 </div>
             </div>
 
-            <div class="step">
-                <div class="row">
-                    <div class="span4">
-                        <h2>City</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="span4">
-                        <form class="form">
-                            <select></select>
-                        </form>
-                        <img class="img-polaroid" src="img/atlanta.jpg" width="100%" />
-                        <p>&nbsp;</p>
-                    </div>
-                    <div class="span8">
-                        <h3>Statistics</h3>
-                        <dl>
-                            <dt>Population</dt>
-                            <dd class="stat-value" data-stat-type="population"></dd>
-                            <dt>Size</dt>
-                            <dd class="stat-value" data-stat-type="size"></dd>
-                            <dt>Number of homeless</dt>
-                            <dd class="stat-value" data-stat-type="homeless-total"></dd>
-                            <dt>Homeless people per 1,000 residents</dt>
-                            <dd class="stat-value" data-stat-type="homeless-proportion"></dd>
-                            <dt>Homeless people per square mile</dt>
-                            <dd class="stat-value" data-stat-type="homeless-density"></dd>
-                        </dl>
-                        <h3>Laws</h3>
-                        <p class="stat-value" data-stat-type="laws"></p>
-                    </div>
-                </div>
+            <div class="page" id="resources">
+                <h1>Resources</h1>
             </div>
 
-            <div class="step">
-                <div class="row">
-                    <div class="span4">
-                        <h2>Building</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="span4">
-                        <form class="form">
-                            <select>
-                                <option value="gt-klaus">Klaus</option>
-                                <option value="gt-culc">CULC</option>
-                            </select>
-                        </form>
-                        <img class="img-polaroid" src="img/gt-klaus.jpg" width="100%" />
-                        <p>&nbsp;</p>
-                    </div>
-                    <div class="span8">
-                        <form class="form">
-                            <label>Available square footage</label>
-                            <input type="text" value="10000">
-                            <label>Max. occupancy</label>
-                            <input type="text" value="1000">
-                            <label>Cost of utilities</label>
-                            <input type="text" value="$50">
-                            <label>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <div class="step">
-                <div class="row">
-                    <div class="span4">
-                        <h2>Simulation</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="span8">
-                        <form class="form">
-                            <label>Hours per night</label>
-                            <input type="text" value="8">
-                            <label>Nights per week</label>
-                            <input type="text" value="5">
-                            <label>Residents per night</label>
-                            <input type="text" value="50">
-                            <label>Risk tolerance</label>
-                            <select>
-                                <option>Medium</option>
-                            </select>
-                        </form>
-                    </div>
-                    <div class="span4">
-                        <p>This space will show the results of the simulation.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row step-controls">
-                <div class="span12">
-                    <a class="btn btn-primary pull-left prev">&laquo; Previous</a>
-                    <a class="btn btn-primary pull-right next">Next &raquo;</a>
-                    <a class="btn btn-primary pull-right restart">Start over</a>
-                </div>
+            <div class="page" id="about">
+                <h1>About</h1>
             </div>
 
             <hr>

@@ -105,6 +105,8 @@ function initForms() {
         $building_select.children(":not(:first)").remove();
         $.each(building_data[this.value], function(id, building) {$building_select.append("<option value='"+id+"'>"+building.name+"</option>");})
         $building_select.change();
+
+        if (city.currency !== undefined) $(".currency").text(city.currency);
     });
     
     $building_select.change(function() {

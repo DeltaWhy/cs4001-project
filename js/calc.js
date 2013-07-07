@@ -8,29 +8,33 @@ var factors = {
     toilets: {
         name: "Toilets",
         valueFn: function () { return parseInt($("#toilets").val()); },
-        capacityFn: function (val) { return val * 15 },
-        description: "Toilet description",
+        capacityFn: function (val) {
+            if (val <= 7) return val * 15;
+            else return (7*15) + (val-7)*30;
+        },
+        description: "Shelters require one toilet per 15 residents up to 100 residents,\
+        and one per 30 residents after that.",
         improvement: "add more toilets"
     },
     sinks: {
         name: "Sinks",
         valueFn: function () { return parseInt($("#sinks").val()); },
         capacityFn: function (val) { return val * 15 },
-        description: "Sink description",
+        description: "Shelters require one sink per 15 residents.",
         improvement: "add more sinks"
     },
     custodial: {
         name: "Custodial staff",
         valueFn: function () { return parseInt($("#custodial").val()); },
         capacityFn: function (val) { return val * 20 },
-        description: "Custodial description",
+        description: "Shelters require about 1 custodian per 20 residents.",
         improvement: "hire more custodians"
     },
     security: {
         name: "Security",
         valueFn: function () { return parseInt($("#security").val()); },
         capacityFn: function (val) { return val * 100 },
-        description: "Security description",
+        description: "Shelters require about 1 security person per 100 residents (recommended minimum of 2).",
         improvement: "hire more security"
     },
 };
@@ -63,6 +67,9 @@ function updateResults() {
         goodCards: goodCards,
         badCards: badCards,
         improvement: limiter.improvement,
-        cost: '$' + ((cards.custodial.value*custodialWage)+(cards.security.value*securityWage))*hours
+        cost: ((cards.custodial.value*custodialWage)+(cards.security.value*securityWage))*hours
     }));
+
+    //hackety hack
+    $("#results .currency").text($(".currency:first").text());
 }

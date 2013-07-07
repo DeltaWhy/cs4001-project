@@ -115,7 +115,7 @@
                         <div class="span4">
                             <form class="form">
                                 <label>Pick a city to find out more about homelessness there and how to start solving the problem:</label>
-                                <select id="city-sel"></select>
+                                <select name="city-sel"></select>
                             </form>
                             <img class="img-polaroid" src="img/atlanta.jpg" width="100%" />
                             <p>&nbsp;</p>
@@ -154,7 +154,7 @@
                             <form class="form">
                                 <label>Pick a preset building or enter information about your own building:</label>
                                 <select id="building-sel">
-                                    <option>Pick a Building</option>
+                                    <option value="gt-klaus">Klaus</option>
                                 </select>
                             </form>
                             <img class="img-polaroid" src="img/gt-klaus.jpg" width="100%" />
@@ -164,31 +164,31 @@
                             <div class="span3">
                                 <h3>General</h3>
                                 <label>Available square footage</label>
-                                <input type="text" class="stat-value" name="sqfoot" id="sqfoot" data-stat-type="area">
+                                <input type="text" name="sqfoot" id="sqfoot" value="414000">
                                 <div id="sqfoot-slider"></div>
                                 <label>Number of available toilets</label>
-                                <input type="number" class="stat-value" name="toilets" id="toilets" min=0 data-stat-type="toilets">
+                                <input type="number" name="toilets" id="toilets" value="100">
                                 <label>Number of available sinks</label>
-                                <input type="number" class="stat-value" name="sinks" id="sinks" min=0 data-stat-type="sinks">
+                                <input type="number" name="sinks" id="sinks" value="100">
                                 <label>Available hours</label>
-                                <input type="text" class="stat-value" name="hours" id="hours" data-stat-type="hours">
+                                <input type="text" name="hours" id="hours" value="12">
                                 <div id="hours-slider"></div>
                             </div>
                             <div class="span3">
                                 <h3>Staff</h3>
                                 <label>Custodial</label>
-                                <input type="number" name="custodial" id="custodial" min=0 value="1">
+                                <input type="number" name="custodial" id="custodial" value="1">
                                 <label>Custodial wages</label>
                                 <div class="input-prepend input-append">
-                                    <span class="add-on currency">$</span>
+                                    <span class="add-on">$</span>
                                     <input type="text" name="custodial-wage" id="custodial-wage" value="8.50">
                                     <span class="add-on">/hour</span>
                                 </div>
                                 <label>Security</label>
-                                <input type="number" name="security" id="security" min=0 value="1">
+                                <input type="number" name="security" id="security" value="1">
                                 <label>Security wages</label>
                                 <div class="input-prepend input-append">
-                                    <span class="add-on currency">$</span>
+                                    <span class="add-on">$</span>
                                     <input type="text" name="security-wage" id="security-wage" value="8.50">
                                     <span class="add-on">/hour</span>
                                 </div>
@@ -272,7 +272,7 @@
                         <p>To increase this number, you need to <strong>{{improvement}}</strong>.</p>
                         {{/improvement}}
                         <h4>Total cost</h4>
-                        <h3 class="card"><span class="currency">{{currency}}</span>{{cost}} per night</h3>
+                        <h3 class="card">{{cost}} per night</h3>
                     </div>
                 </div>
                 </div>
@@ -328,7 +328,7 @@ long-term replacements are to be done.</p>
 <p class= "break">Some homeless shelters are designed specifically for women and children; however, space is sometimes limited, and women are forced to choose between staying in a coed shelter or sleeping on the street. Both adult females and young girls stand the chance of being raped at night in some coed shelters. If the shelter is overcrowded, then staff and security can't keep an eye on everyone.</p>
 <p class= "break">Stealing:</p>
 <p class= "break">Not all homeless people are in the exact same situation: some are newly homeless while others have been on the streets for years. Homeless people who carry around a certain amount of possessions may be afraid to sleep in homeless shelters because others might steal the few items they still have. Human predators who literally have nothing may steal gloves, coats or tiny amounts of money from other people trying to get some sleep in the shelter.</p>
-<p class= "break">Violence:>
+<p class= "break">Violence:</p>
 <p class= "break">Homeless shelters may lack proper security. When a roomful of tired, hungry and cold people get together, then it doesn't take much for one person to get out of line and for a fight to break out. People can get hurt or even killed when guns or knives are involved. Sometimes mentally ill people in homeless shelters who cannot afford their medication can lash out at others for no reason at all.</p>
 <p class= "break">Sickness and Disease:</p>
 <p class= "break">Since homeless people lack medical care, a homeless shelter can be filled with people with colds and the flu and other sicknesses. These people are sleeping in close quarters, so the odds of passing germs around the room is great. Some homeless people may not even realize that they have a disease -- sexually transmitted diseases, HIV -- and may pass the disease on to other people who they meet through unprotected sex or shared needle use.</p>

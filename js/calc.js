@@ -63,6 +63,9 @@ function updateResults() {
         goodCards: goodCards,
         badCards: badCards,
         improvement: limiter.improvement,
-        cost: '$' + ((cards.custodial.value*custodialWage)+(cards.security.value*securityWage))*hours
+        cost: ((cards.custodial.value*custodialWage)+(cards.security.value*securityWage))*hours
     }));
+
+    //hackety hack
+    $("#results .currency").text($(".currency:first").text());
 }

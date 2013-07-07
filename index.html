@@ -181,7 +181,7 @@
                                 <input type="number" name="custodial" id="custodial" min=0 value="1">
                                 <label>Custodial wages</label>
                                 <div class="input-prepend input-append">
-                                    <span class="add-on">$</span>
+                                    <span class="add-on currency">$</span>
                                     <input type="text" name="custodial-wage" id="custodial-wage" value="8.50">
                                     <span class="add-on">/hour</span>
                                 </div>
@@ -189,7 +189,7 @@
                                 <input type="number" name="security" id="security" min=0 value="1">
                                 <label>Security wages</label>
                                 <div class="input-prepend input-append">
-                                    <span class="add-on">$</span>
+                                    <span class="add-on currency">$</span>
                                     <input type="text" name="security-wage" id="security-wage" value="8.50">
                                     <span class="add-on">/hour</span>
                                 </div>
@@ -273,7 +273,7 @@
                         <p>To increase this number, you need to <strong>{{improvement}}</strong>.</p>
                         {{/improvement}}
                         <h4>Total cost</h4>
-                        <h3 class="card">{{cost}} per night</h3>
+                        <h3 class="card"><span class="currency">{{currency}}</span>{{cost}} per night</h3>
                     </div>
                 </div>
                 </div>

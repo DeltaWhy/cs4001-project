@@ -98,15 +98,30 @@ function initForms() {
     $(select).change(function() {
         updateStats($(this).parents(".step"), this.value);
     }); 
-}
 
-//AJAX page switching
-/*$(function() {
-    $(".nav a").bind("click", function(e) {
-        $("#container").load($(e.target).attr("href") + " #container");
-        e.preventDefault();
+    var sqfoot_max = 414000;
+    $("#sqfoot-slider").slider({
+        value: sqfoot_max,
+        range: "min",
+        min: 0,
+        max: sqfoot_max,
+        step: 1,
+        slide: function (event, ui) {
+            $("#sqfoot").val(ui.value);
+        }
     });
-});*/
+
+    $("#hours-slider").slider({
+        value: 12,
+        range: "min",
+        min: 0,
+        max: 24,
+        step: 1,
+        slide: function (event, ui) {
+            $("#hours").val(ui.value);
+        }
+    });
+}
 
 function updateStats(step, key) {
     var data = $(step).data("stat-set")[key];

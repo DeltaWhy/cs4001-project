@@ -9,7 +9,7 @@ $(function() {
         $(".page").eq(0).show();
         $(".nav li").eq(0).addClass("active");
     }
-    $(".nav a").bind("click", function(e) {
+    $(".nav a, a.brand").bind("click", function(e) {
         $(".page").hide();
         var id = $(e.target).attr("href");
         $(id).show();

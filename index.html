@@ -232,6 +232,7 @@
                 <div class="row">
                     <div class="span4">
                         <h4>Good</h4>
+                        <p class="muted">These resources are sufficient for the available space.</p>
                         {{#goodCards}}
                         <div class="card good">
                             <i class="icon-ok-sign"></i>
@@ -240,9 +241,13 @@
                             <p class="capacity">{{capacity}} people</p>
                         </div>
                         {{/goodCards}}
+                        {{^goodCards}}
+                        <p class="alert alert-warning">You need to increase all your resources in order to use the whole available space.</p>
+                        {{/goodCards}}
                     </div>
                     <div class="span4">
                         <h4>Bad</h4>
+                        <p class="muted">These resources are not enough for the available space.</p>
                         {{#badCards}}
                         <div class="card bad">
                             <i class="icon-exclamation-sign"></i>
@@ -250,6 +255,9 @@
                             <p>{{description}}</p>
                             <p class="capacity">{{capacity}} people</p>
                         </div>
+                        {{/badCards}}
+                        {{^badCards}}
+                        <p class="alert alert-success">You have sufficient resources to use the entire available space.</p>
                         {{/badCards}}
                     </div>
                     <div class="span4">
@@ -261,7 +269,9 @@
                             <div class="bar bar-success" style="width: {{percentCapacity}}">{{capacity}}</div>
                             <div class="bar bar-warning" style="width: {{percentRemaining}}">{{remaining}}</div>
                         </div>
+                        {{#improvement}}
                         <p>To increase this number, you need to <strong>{{improvement}}</strong>.</p>
+                        {{/improvement}}
                         <h4>Total cost</h4>
                         <h3 class="card">{{cost}} per night</h3>
                     </div>

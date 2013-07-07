@@ -85,7 +85,7 @@ function initForms() {
     var building_data;
     $.getJSON("data/cities.json").done(function(data) {
         city_data = data;
-        $.each(data, function(id,city) {$city_select.append("<option value='"+id+"'>"+city.name+"</option>");})
+        $.each(data, function(id,city) {$city_select.append("<option value='"+id+"'>"+city.name+"</option>");console.log(city);})
         if (building_data) $city_select.change();
     });
     

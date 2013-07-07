@@ -33,48 +33,44 @@ $(function() {
 
 function changePage(page) {
     if (page == "#simulation") {
-        resetSteps();
+        changeStep($(".step:first"));
     }
 }
 
-function resetSteps() {
+function changeStep(step) {
     $(".step").hide();
-    $(".step:first").show();
-    $(".step-controls .btn.restart").hide();
-    $(".step-controls .btn.prev").hide();
+    $(step).show();
+    if ($(step).attr("id") == "results") {
+        updateResults();
+    }
+    if ($(step).is(":first")) {
+        $(".step-controls .btn.restart").hide();
+        $(".step-controls .btn.prev").hide();
+        $(".step-controls .btn.next").show();
+    } else if ($(step).is(":last")) {
+        $(".step-controls .btn.restart").show();
+        $(".step-controls .btn.prev").show();
+        $(".step-controls .btn.next").hide();
+    } else {
+        $(".step-controls .btn.restart").hide();
+        $(".step-controls .btn.prev").show();
+        $(".step-controls .btn.next").show();
+    }
 }
 
 function initSteps() {
-    resetSteps();
+    changeStep($(".step:first"));
     //next button
     $(".step-controls .btn.next").bind("click", function(e) {
-        var $step = $(".step:visible").hide().next().show();
-        if ($step.prev().is(".step:first")) {
-            $(".step-controls .btn.prev").show();
-        } 
-        if ($step.is(".step:last")) {
-            $(".step-controls .btn.next").hide();
-            $(".step-controls .btn.restart").show();
-        }
+        changeStep($(".step:visible").next(".step"));
     });
     //previous button
     $(".step-controls .btn.prev").bind("click", function(e) {
-        var $step = $(".step:visible").hide().prev().show();
-        if ($step.is(".step:first")) {
-            $(".step-controls .btn.prev").hide();
-        } 
-        if ($step.next().is(".step:last")) {
-            $(".step-controls .btn.restart").hide();
-            $(".step-controls .btn.next").show();
-        }
+        changeStep($(".step:visible").prev(".step"));
     });
     //reset button
     $(".step-controls .btn.restart").bind("click", function(e) {
-        $(".step:visible").hide();
-        $(".step").eq(0).show();
-        $(".step-controls .btn.prev").hide();
-        $(".step-controls .btn.restart").hide();
-        $(".step-controls .btn.next").show();
+        changeStep($(".step:first"));
     });
 }
 

@@ -178,19 +178,19 @@
                             <div class="span3">
                                 <h3>Staff</h3>
                                 <label>Custodial</label>
-                                <input type="number" name="staff" id="staff" min=0 value="1">
+                                <input type="number" name="custodial" id="custodial" min=0 value="1">
                                 <label>Custodial wages</label>
                                 <div class="input-prepend input-append">
                                     <span class="add-on">$</span>
-                                    <input type="text" name="wage" id="wage" value="8.50">
+                                    <input type="text" name="custodial-wage" id="custodial-wage" value="8.50">
                                     <span class="add-on">/hour</span>
                                 </div>
                                 <label>Security</label>
-                                <input type="number" name="staff" id="staff" min=0 value="1">
+                                <input type="number" name="security" id="security" min=0 value="1">
                                 <label>Security wages</label>
                                 <div class="input-prepend input-append">
                                     <span class="add-on">$</span>
-                                    <input type="text" name="wage" id="wage" value="8.50">
+                                    <input type="text" name="security-wage" id="security-wage" value="8.50">
                                     <span class="add-on">/hour</span>
                                 </div>
                             </div>
@@ -219,46 +219,63 @@
                                 </select>
                             </form>
                         </div>
-                        <div class="span4">
-                            <p>This space will show the results of the simulation.</p>
-                        </div>
                     </div>
                 </div>
 
-                <div class="step">
-                    <div class="row">
-                        <h2>Results</h2>
+                <div class="step" id="results">
+                </div>
+
+                <div id="results-template" style="display:none">
+                <div class="row">
+                    <h2>Results</h2>
+                </div>
+                <div class="row">
+                    <div class="span4">
+                        <h4>Good</h4>
+                        <p class="muted">These resources are sufficient for the available space.</p>
+                        {{#goodCards}}
+                        <div class="card good">
+                            <i class="icon-ok-sign"></i>
+                            <h5 class="card-title">{{name}}</h5>
+                            <p>{{description}}</p>
+                            <p class="capacity">{{capacity}} people</p>
+                        </div>
+                        {{/goodCards}}
+                        {{^goodCards}}
+                        <p class="alert alert-warning">You need to increase all your resources in order to use the whole available space.</p>
+                        {{/goodCards}}
                     </div>
-                    <div class="row">
-                        <div class="span4">
-                            <h4>Good</h4>
-                            <div class="card good">
-                                <i class="icon-ok-sign"></i>
-                                <h5 class="card-title">Bathrooms</h5>
-                                <p>Blah blah blah blah</p>
-                                <p class="capacity">500 people</p>
-                            </div>
+                    <div class="span4">
+                        <h4>Bad</h4>
+                        <p class="muted">These resources are not enough for the available space.</p>
+                        {{#badCards}}
+                        <div class="card bad">
+                            <i class="icon-exclamation-sign"></i>
+                            <h5 class="card-title">{{name}}</h5>
+                            <p>{{description}}</p>
+                            <p class="capacity">{{capacity}} people</p>
                         </div>
-                        <div class="span4">
-                            <h4>Bad</h4>
-                            <div class="card bad">
-                                <i class="icon-exclamation-sign"></i>
-                                <h5 class="card-title">Security</h5>
-                                <p>Blah blah blah blah</p>
-                                <p class="capacity">10 people</p>
-                            </div>
-                        </div>
-                        <div class="span4 outcomes">
-                            <h4>Outcomes</h4>
-                            <p>Based on this information, you can shelter:</p>
-                            <h3 class="well">500 people</h3>
-                            <p>out of a total capacity of <strong>2,000</strong>.</p>
-                            <div id="capacity-graph"></div>
-                            <p>To increase this number, you need to <strong>hire additional security</strong>.</p>
-                            <h4>Total cost</h4>
-                            <h3 class="well">$1,000 per night</h3>
-                        </div>
+                        {{/badCards}}
+                        {{^badCards}}
+                        <p class="alert alert-success">You have sufficient resources to use the entire available space.</p>
+                        {{/badCards}}
                     </div>
+                    <div class="span4">
+                        <h4>Outcomes</h4>
+                        <p>Based on this information, you can shelter:</p>
+                        <h3 class="card">{{capacity}} people</h3>
+                        <p>out of a total capacity of <strong>{{maxCapacity}}</strong>.</p>
+                        <div id="capacity-graph" class="progress">
+                            <div class="bar bar-success" style="width: {{percentCapacity}}">{{capacity}}</div>
+                            <div class="bar bar-warning" style="width: {{percentRemaining}}">{{remaining}}</div>
+                        </div>
+                        {{#improvement}}
+                        <p>To increase this number, you need to <strong>{{improvement}}</strong>.</p>
+                        {{/improvement}}
+                        <h4>Total cost</h4>
+                        <h3 class="card">{{cost}} per night</h3>
+                    </div>
+                </div>
                 </div>
 
                 <div class="row step-controls">
@@ -296,6 +313,7 @@
         <script src="js/vendor/underscore-min.js"></script>
         <script src="js/vendor/mustache.js"></script>
 
+        <script src="js/calc.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>

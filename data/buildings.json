@@ -1,0 +1,22 @@
+{
+    "atlanta": {   
+        "gt-klaus": {
+            "name": "Klaus Advanced Computing Building",
+            "image": "gt-klaus.jpg",
+            "area": 414000,
+            "toilets": 100,
+            "sinks": 100,
+            "hours": 12            
+        }
+    },
+    "barcelona": {
+       "agbar": {
+            "name": "Torre Agbar",
+            "image": "agbar.jpg",
+            "area": 0,
+            "toilets": 0,
+            "sinks": 0,
+            "hours": 0    
+        }
+    }
+}

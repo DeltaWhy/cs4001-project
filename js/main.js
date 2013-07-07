@@ -80,17 +80,53 @@ function initSteps() {
 
 //form initialization
 function initForms() {
-    var select;
-    select = $(".step").eq(0).find("select");
-    $.getJSON("data/cities.json").done(function(data) {
-        $(".step").eq(0).data("stat-set",data);
-        $.each(data, function(id,city) {$(select).append("<option value='"+id+"'>"+city.name+"</option>");})
-        $(select).change();
-    });
-    $(select).change(function() {
-        updateStats($(this).parents(".step"), this.value);
-    }); 
 
+    //load json data and initialize selectors
+    var $city_select = $("#city-sel");
+    var $building_select = $("#building-sel");
+    
+    var city_data;
+    var building_data;
+    $.getJSON("data/cities.json").done(function(data) {
+        city_data = data;
+        $.each(data, function(id,city) {$city_select.append("<option value='"+id+"'>"+city.name+"</option>");})
+        if (building_data) $city_select.change();
+    });
+    
+    $.getJSON("data/buildings.json").done(function(data) {
+        building_data = data;
+        if (city_data) $city_select.change();
+    });
+    
+    $city_select.change(function() {
+        var $step = $(this).parents(".step");
+        var city = city_data[this.value];
+        $step.find("img").attr("src", "img/"+city["image"]);
+        $step.find(".stat-value").each(function(ind, stat) {
+            $(stat).html(city[$(stat).data("stat-type")]);
+        });
+        //update buildings listing for city
+        $building_select.children(":not(:first)").remove();
+        $.each(building_data[this.value], function(id, building) {$building_select.append("<option value='"+id+"'>"+building.name+"</option>");})
+        $building_select.change();
+    });
+    
+    $building_select.change(function() {
+        var $step = $(this).parents(".step");
+        var building = building_data[$city_select.children("option:selected").val()][this.value];
+        if (!building) { //undefined for the add your own option.
+            $step.find("img").css("visibility","hidden");
+            $step.find("input").val("").change();
+        } else {
+            $step.find("img").attr("src", "img/"+building["image"]).css("visibility","visible");
+            $step.find(".stat-value").each(function(ind, stat) {
+                $(stat).val(building[$(stat).data("stat-type")]).change();
+            });
+            $("#sqfoot-slider").slider("option", "max", building.area);
+        }
+    });
+
+    //set up sliders
     var sqfoot_max = 414000;
     $("#sqfoot-slider").slider({
         value: sqfoot_max,
@@ -102,6 +138,7 @@ function initForms() {
             $("#sqfoot").val(ui.value);
         }
     });
+    $("#sqfoot").on("change", function() {$("#sqfoot-slider").slider("value", this.value);});
 
     $("#hours-slider").slider({
         value: 12,
@@ -113,12 +150,5 @@ function initForms() {
             $("#hours").val(ui.value);
         }
     });
-}
-
-function updateStats(step, key) {
-    var data = $(step).data("stat-set")[key];
-    $(step).find("img").attr("src", "img/"+data["image"]);
-    $(step).find(".stat-value").each(function(ind, stat) {
-        $(stat).html(data[$(stat).data("stat-type")]);
-    });
+    $("#hours").on("change", function() {$("#hours-slider").slider("value", this.value);});
 }

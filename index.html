@@ -116,7 +116,7 @@
                         <div class="span4">
                             <form class="form">
                                 <label>Pick a city to find out more about homelessness there and how to start solving the problem:</label>
-                                <select name="city-sel"></select>
+                                <select id="city-sel"></select>
                             </form>
                             <img class="img-polaroid" src="img/atlanta.jpg" width="100%" />
                             <p>&nbsp;</p>
@@ -155,7 +155,7 @@
                             <form class="form">
                                 <label>Pick a preset building or enter information about your own building:</label>
                                 <select id="building-sel">
-                                    <option value="gt-klaus">Klaus</option>
+                                    <option>Pick a Building</option>
                                 </select>
                             </form>
                             <img class="img-polaroid" src="img/gt-klaus.jpg" width="100%" />
@@ -165,20 +165,20 @@
                             <div class="span3">
                                 <h3>General</h3>
                                 <label>Available square footage</label>
-                                <input type="text" name="sqfoot" id="sqfoot" value="414000">
+                                <input type="text" class="stat-value" name="sqfoot" id="sqfoot" data-stat-type="area">
                                 <div id="sqfoot-slider"></div>
                                 <label>Number of available toilets</label>
-                                <input type="number" name="toilets" id="toilets" value="100">
+                                <input type="number" class="stat-value" name="toilets" id="toilets" min=0 data-stat-type="toilets">
                                 <label>Number of available sinks</label>
-                                <input type="number" name="sinks" id="sinks" value="100">
+                                <input type="number" class="stat-value" name="sinks" id="sinks" min=0 data-stat-type="sinks">
                                 <label>Available hours</label>
-                                <input type="text" name="hours" id="hours" value="12">
+                                <input type="text" class="stat-value" name="hours" id="hours" data-stat-type="hours">
                                 <div id="hours-slider"></div>
                             </div>
                             <div class="span3">
                                 <h3>Staff</h3>
                                 <label>Custodial</label>
-                                <input type="number" name="staff" id="staff" value="1">
+                                <input type="number" name="staff" id="staff" min=0 value="1">
                                 <label>Custodial wages</label>
                                 <div class="input-prepend input-append">
                                     <span class="add-on">$</span>
@@ -186,7 +186,7 @@
                                     <span class="add-on">/hour</span>
                                 </div>
                                 <label>Security</label>
-                                <input type="number" name="staff" id="staff" value="1">
+                                <input type="number" name="staff" id="staff" min=0 value="1">
                                 <label>Security wages</label>
                                 <div class="input-prepend input-append">
                                     <span class="add-on">$</span>

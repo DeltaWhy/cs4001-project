@@ -43,11 +43,11 @@ function changeStep(step) {
     if ($(step).attr("id") == "results") {
         updateResults();
     }
-    if ($(step).is(":first")) {
+    if ($(step).is(".step:first")) {
         $(".step-controls .btn.restart").hide();
         $(".step-controls .btn.prev").hide();
         $(".step-controls .btn.next").show();
-    } else if ($(step).is(":last")) {
+    } else if ($(step).is(".step:last")) {
         $(".step-controls .btn.restart").show();
         $(".step-controls .btn.prev").show();
         $(".step-controls .btn.next").hide();

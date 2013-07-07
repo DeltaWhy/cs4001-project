@@ -22,14 +22,14 @@ var factors = {
     custodial: {
         name: "Custodial staff",
         valueFn: function () { return parseInt($("#custodial").val()); },
-        capacityFn: function (val) { return val * 15 },
+        capacityFn: function (val) { return val * 20 },
         description: "Custodial description",
         improvement: "hire more custodians"
     },
     security: {
         name: "Security",
         valueFn: function () { return parseInt($("#security").val()); },
-        capacityFn: function (val) { return val * 15 },
+        capacityFn: function (val) { return val * 100 },
         description: "Security description",
         improvement: "hire more security"
     },

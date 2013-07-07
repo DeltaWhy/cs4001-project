@@ -50,6 +50,14 @@ $(function() {
     }); 
 });
 
+//AJAX page switching
+/*$(function() {
+    $(".nav a").bind("click", function(e) {
+        $("#container").load($(e.target).attr("href") + " #container");
+        e.preventDefault();
+    });
+});*/
+
 function updateStats(step, key) {
         var data = $(step).data("stat-set")[key];
         $(step).find("img").attr("src", "img/"+data["image"]);

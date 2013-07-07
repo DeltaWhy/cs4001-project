@@ -26,6 +26,8 @@ $(function() {
         curNav.next("li").addClass("active");
         changePage("#" + curPage.next(".page").attr("id"));
     });
+
+    initForms();
 });
 
 function changePage(page) {
@@ -82,8 +84,6 @@ function initSteps() {
         $(".step-controls .btn.restart").hide();
         $(".step-controls .btn.next").show();
     });
-
-    initForms();
 }
 
 //form initialization

@@ -7,7 +7,7 @@
         "homeless-total": 7000,
         "homeless-proportion": 15.773,
         "homeless-density": 52.87,
-        "laws": ""
+        "laws": "No Data Available at this Moment"
     },
     "barcelona": {
         "name": "Barcelona, Spain",
@@ -17,6 +17,6 @@
         "homeless-total": 3000,
         "homeless-proportion": 1.85,
         "homeless-density": 76.335,
-        "laws": ""
+        "laws": "No Data Available at this Moment"
     }
 }

@@ -183,60 +183,36 @@
                             <div class="span3">
                                 <h3>General</h3>
                                 <label>Available square footage</label>
-                                <input type="text" name="sqfoot" id="sqfoot" value="414000">
+                                <input type="text" class="stat-value" name="sqfoot" id="sqfoot" data-stat-type="area">
                                 <div id="sqfoot-slider"></div>
                                 <label>Number of available toilets</label>
-                                <input type="number" name="toilets" id="toilets" value="100">
+                                <input type="number" class="stat-value" name="toilets" id="toilets" min=0 data-stat-type="toilets">
                                 <label>Number of available sinks</label>
-                                <input type="number" name="sinks" id="sinks" value="100">
+                                <input type="number" class="stat-value" name="sinks" id="sinks" min=0 data-stat-type="sinks">
                                 <label>Available hours</label>
-                                <input type="text" name="hours" id="hours" value="12">
+                                <input type="text" class="stat-value" name="hours" id="hours" data-stat-type="hours">
                                 <div id="hours-slider"></div>
                             </div>
                             <div class="span3">
                                 <h3>Staff</h3>
                                 <label>Custodial</label>
-                                <input type="number" name="custodial" id="custodial" value="1">
+                                <input type="number" name="staff" id="staff" min=0 value="1">
                                 <label>Custodial wages</label>
                                 <div class="input-prepend input-append">
                                     <span class="add-on">$</span>
-                                    <input type="text" name="custodial-wage" id="custodial-wage" value="8.50">
+                                    <input type="text" name="wage" id="wage" value="8.50">
                                     <span class="add-on">/hour</span>
                                 </div>
                                 <label>Security</label>
-                                <input type="number" name="security" id="security" value="1">
+                                <input type="number" name="staff" id="staff" min=0 value="1">
                                 <label>Security wages</label>
                                 <div class="input-prepend input-append">
                                     <span class="add-on">$</span>
-                                    <input type="text" name="security-wage" id="security-wage" value="8.50">
+                                    <input type="text" name="wage" id="wage" value="8.50">
                                     <span class="add-on">/hour</span>
                                 </div>
                             </div>
                         </form>
-                    </div>
-                </div>
-
-                <div class="step">
-                    <div class="row">
-                        <div class="span4">
-                            <h2>Additional Parameters</h2>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="span8">
-                            <form class="form">
-                                <label>Hours per night</label>
-                                <input type="text" value="8">
-                                <label>Nights per week</label>
-                                <input type="text" value="5">
-                                <label>Residents per night</label>
-                                <input type="text" value="50">
-                                <label>Risk tolerance</label>
-                                <select>
-                                    <option>Medium</option>
-                                </select>
-                            </form>
-                        </div>
                     </div>
                 </div>
 

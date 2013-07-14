@@ -155,25 +155,46 @@ function initForms() {
     });
     $("#hours").on("change", function() {$("#hours-slider").slider("value", this.value);});
     
-    //disqus initialization note: cities already populated
+    //Disqus initialization note: cities already populated
     var $disqus_city = $("#disqus-city");
     var $disqus_building = $("#disqus-building").prop("disabled",true);
     
-    $disqus_city.click(function() {
-        if ($(this).children("option:selected").is(":first")) {
+    $disqus_city.change(function() {
+        if (!$(this).val()) {
             $disqus_building.prop("disabled",true);
-            $disqus_building.children("option:not(:first)").remove();
         } else {
-            //update buildings
-            $.each(building_data[$(this).children("option:selected").val()], function(id,building) {
+            $disqus_building.children("option:not(:first)").remove();
+            $.each(building_data[$(this).val()], function(id,building) {
                 $disqus_building.append("<option value='"+id+"'>"+building.name+"</option>");
             });
             $disqus_building.prop("disabled",false);
         }
+        $disqus_building.change();
     });
-}
-
-
-function initDisqus() {
-
+    
+    $disqus_building.change(function() {
+        //change Disqus thread
+        var city = $disqus_city.val() 
+        var building = $disqus_building.val();
+        var identifier = "/general" 
+        var title = "Homlessness Problem/Solution";
+        if (city) {
+            identifier = "/" + city;
+            title = "Homelessness in " + city_data[city].name;
+            if (building) {
+                identifier += "/" + building
+                title += " / " + building_data[city][building].name; 
+            }      
+        }
+        console.log("Changing thread to: " + identifier + "\n With title: "+title);
+        
+        DISQUS.reset({
+            reload: true,
+            config: function () {  
+                this.page.identifier = identifier;
+                this.page.url = "http://files.limiero.com/CS4001/#!" + identifier;
+                this.page.title = title;
+            }
+        });
+    });
 }

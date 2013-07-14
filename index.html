@@ -116,7 +116,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> <!-- /problem page -->
             
             <div class="page" id="the-solution">
                 <h1>The solution?</h1>
@@ -130,7 +130,7 @@
                     </div>
                 </div>
                 <p><a class="btn btn-primary next-page" href="#simulation">Evaluation tool</a></p>
-            </div> 
+            </div> <!-- /solution page -->
             
             <div class="page" id="simulation">
                 <div class="step">
@@ -304,11 +304,48 @@
                         <a class="btn btn-primary pull-right restart">Start over</a>
                     </div>
                 </div>
-            </div>
+            </div> <!-- /evaluation page -->
             
             <div class="page" id="discussion">
-                
-            </div>
+                <div class="row">
+                    <h1>Discuss</h1>
+                </div>
+                <div class="row">
+                    <div class="span4">
+                        <p>Share your mind! Talk about the problem/solution in
+                        general or select from the dropdowns below to talk about
+                        a specifc city/building!</p>
+                        <form id="disqus-selectors">
+                            <label>City:</label>
+                            <select id="disqus-city">
+                                <option>Pick a City</option>
+                            </select>
+                            <label>Building:</label>
+                            <select id="disqus-building">
+                                <option>Pick a Building</option>
+                            </select>
+                        </form>
+                    </div>
+                    <div class="span6 offset1 card">
+                        <div id="disqus_thread"></div>
+                        <script type="text/javascript">
+                            var disqus_identifier = 'general';
+                            var disqus_title = 'General Discussion';
+                            var disqus_shortname = 'cs-4001-tmp-home';
+                            var disqus_url = 'http://files.limiero.com/CS4001';
+                            var disqus_developer = 1;
+
+                            /* * * DON'T EDIT BELOW THIS LINE * * */
+                            (function() {
+                                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                            })();
+                        </script>
+                        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+                    </div>
+                </div>
+            </div> <!-- /discussion page -->
 
             <div class="page" id="resources">
                 <h1>Resources</h1>

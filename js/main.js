@@ -86,7 +86,8 @@ function initForms() {
     var building_data;
     $.getJSON("data/cities.json").done(function(data) {
         city_data = data;
-        $.each(data, function(id,city) {$city_select.append("<option value='"+id+"'>"+city.name+"</option>");})
+        $.each(data, function(id,city) {$city_select.append("<option value='"+id+"'>"+city.name+"</option>");});
+        $.each(city_data, function(id,city) {$("#disqus-city").append("<option value='"+id+"'>"+city.name+"</option>");});
         if (building_data) $city_select.change();
     });
     
@@ -153,4 +154,26 @@ function initForms() {
         }
     });
     $("#hours").on("change", function() {$("#hours-slider").slider("value", this.value);});
+    
+    //disqus initialization note: cities already populated
+    var $disqus_city = $("#disqus-city");
+    var $disqus_building = $("#disqus-building").prop("disabled",true);
+    
+    $disqus_city.click(function() {
+        if ($(this).children("option:selected").is(":first")) {
+            $disqus_building.prop("disabled",true);
+            $disqus_building.children("option:not(:first)").remove();
+        } else {
+            //update buildings
+            $.each(building_data[$(this).children("option:selected").val()], function(id,building) {
+                $disqus_building.append("<option value='"+id+"'>"+building.name+"</option>");
+            });
+            $disqus_building.prop("disabled",false);
+        }
+    });
+}
+
+
+function initDisqus() {
+
 }

@@ -33,6 +33,7 @@
                             <li><a href="#the-problem">The problem</a></li>
                             <li><a href="#the-solution">The solution?</a></li>
                             <li><a href="#simulation">Evaluation tool</a></li>
+                            <li><a href="#discussion">Discussion</a></li>
                             <li><a href="#resources">Resources</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
@@ -97,13 +98,21 @@
                     <div class="span4">
                         <h4>Sources:</h4>
                         <ul>
-                            <li><a href="http://www.tri-j.net/clientimages/40236/2011tri-jhomelesscensusreport.pdf">The 2011 Metro Atlanta Tri-Jurisdictional Collaborative Continuum of Care Homeless Census</a></li>
-                            <li><a href="https://www.homeaidatlanta.org/helpnumbers.php">Home Aid Atlanta: Homelessness by the Numbers</a></li>
-                            <li><a href="http://homeless.samhsa.gov/resource/report-from-barcelona-fostering-social-inclusion-to-end-homelessness-50139.aspx">Report From Barcelona: Fostering Social Inclusion to End Homelessness</a></li>
-                            <li><a href="http://www.barcelona-metropolitan.com/living/street-life/">Barcelona Metropolitan: Street Life</a></li>
+                            <li><a href="http://www.tri-j.net/clientimages/40236/2011tri-jhomelesscensusreport.pdf">
+                                The 2011 Metro Atlanta Tri-Jurisdictional Collaborative Continuum of Care Homeless Census
+                            </a></li>
+                            <li><a href="https://www.homeaidatlanta.org/helpnumbers.php">
+                                Home Aid Atlanta: Homelessness by the Numbers
+                            </a></li>
+                            <li><a href="http://homeless.samhsa.gov/resource/report-from-barcelona-fostering-social-inclusion-to-end-homelessness-50139.aspx">
+                                Report From Barcelona: Fostering Social Inclusion to End Homelessness
+                            </a></li>
+                            <li><a href="http://www.barcelona-metropolitan.com/living/street-life/">
+                                Barcelona Metropolitan: Street Life
+                            </a></li>
                         </ul>
                         <div class="card">
-                            <center><a class="btn btn-primary next-page" href="#">The solution?</a></center>
+                            <center><a class="btn btn-primary next-page" href="#solution">The solution?</a></center>
                         </div>
                     </div>
                 </div>
@@ -120,7 +129,7 @@
                         would it involve?</p>
                     </div>
                 </div>
-                <p><a class="btn btn-primary next-page" href="#">Evaluation tool</a></p>
+                <p><a class="btn btn-primary next-page" href="#simulation">Evaluation tool</a></p>
             </div> 
             
             <div class="page" id="simulation">
@@ -155,7 +164,15 @@
                                 <dd class="stat-value" data-stat-type="homeless-density"></dd>
                             </dl>
                             <h3>Laws</h3>
-                            <p>Homeless shelters in the U.S. must abide to the <a href="https://www.onecpd.info/resources/documents/S896_HEARTHAct.pdf">Homeless Emergency  and Rapid Transition to Housing (HEARTH) Act</a>, as well as <a href="http://portal.hud.gov/hudportal/HUD?src=/program_offices/fair_housing_equal_opp/FHLaws">Fair Housing Laws</a> and related Presidential Executive Orders. Please be sure to consult your local laws as well. More information can be found at the following page: 
+                            <p>Homeless shelters in the U.S. must abide to the
+                            <a href="https://www.onecpd.info/resources/documents/S896_HEARTHAct.pdf">
+                                Homeless Emergency and Rapid Transition to Housing (HEARTH)Act
+                            </a>, as well as 
+                            <a href="http://portal.hud.gov/hudportal/HUD?src=/program_offices/fair_housing_equal_opp/FHLaws">
+                            Fair Housing Laws</a> and related Presidential Executive
+                            Orders. Please be sure to consult your local laws as
+                            well. More information can be found at the following
+                            page: 
                                 <span class="stat-value" data-stat-type="laws"></span>
                             </p>
                         </div>
@@ -217,59 +234,67 @@
                 </div>
 
                 <div class="step" id="results">
+                    <!--Mustache content goes here -->
+                    <div class="row">
+                        <div class="span12 card">
+                            <h1>What do you think?</h1>
+                            <p>Let people know what you think about using this particular building or the idea in general at our discussion page.</p>
+                            <a class="btn btn-primary next-page" href="#discussion">Discuss</a>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="results-template" style="display:none">
-                <div class="row">
-                    <h2>Results</h2>
-                </div>
-                <div class="row">
-                    <div class="span4">
-                        <h4>Good</h4>
-                        <p class="muted">These resources are sufficient for the available space.</p>
-                        {{#goodCards}}
-                        <div class="card good">
-                            <i class="icon-ok-sign"></i>
-                            <h5 class="card-title">{{name}}</h5>
-                            <p>{{description}}</p>
-                            <p class="capacity">{{capacity}} people</p>
-                        </div>
-                        {{/goodCards}}
-                        {{^goodCards}}
-                        <p class="alert alert-warning">You need to increase all your resources in order to use the whole available space.</p>
-                        {{/goodCards}}
+                    <div class="row">
+                        <h2>Results</h2>
                     </div>
-                    <div class="span4">
-                        <h4>Bad</h4>
-                        <p class="muted">These resources are not enough for the available space.</p>
-                        {{#badCards}}
-                        <div class="card bad">
-                            <i class="icon-exclamation-sign"></i>
-                            <h5 class="card-title">{{name}}</h5>
-                            <p>{{description}}</p>
-                            <p class="capacity">{{capacity}} people</p>
+                    <div class="row">
+                        <div class="span4">
+                            <h4>Good</h4>
+                            <p class="muted">These resources are sufficient for the available space.</p>
+                            {{#goodCards}}
+                            <div class="card good">
+                                <i class="icon-ok-sign"></i>
+                                <h5 class="card-title">{{name}}</h5>
+                                <p>{{description}}</p>
+                                <p class="capacity">{{capacity}} people</p>
+                            </div>
+                            {{/goodCards}}
+                            {{^goodCards}}
+                            <p class="alert alert-warning">You need to increase all your resources in order to use the whole available space.</p>
+                            {{/goodCards}}
                         </div>
-                        {{/badCards}}
-                        {{^badCards}}
-                        <p class="alert alert-success">You have sufficient resources to use the entire available space.</p>
-                        {{/badCards}}
-                    </div>
-                    <div class="span4">
-                        <h4>Outcomes</h4>
-                        <p>Based on this information, you can shelter:</p>
-                        <h3 class="card">{{capacity}} people</h3>
-                        <p>out of a total capacity of <strong>{{maxCapacity}}</strong>.</p>
-                        <div id="capacity-graph" class="progress">
-                            <div class="bar bar-success" style="width: {{percentCapacity}}">{{capacity}}</div>
-                            <div class="bar bar-warning" style="width: {{percentRemaining}}">{{remaining}}</div>
+                        <div class="span4">
+                            <h4>Bad</h4>
+                            <p class="muted">These resources are not enough for the available space.</p>
+                            {{#badCards}}
+                            <div class="card bad">
+                                <i class="icon-exclamation-sign"></i>
+                                <h5 class="card-title">{{name}}</h5>
+                                <p>{{description}}</p>
+                                <p class="capacity">{{capacity}} people</p>
+                            </div>
+                            {{/badCards}}
+                            {{^badCards}}
+                            <p class="alert alert-success">You have sufficient resources to use the entire available space.</p>
+                            {{/badCards}}
                         </div>
-                        {{#improvement}}
-                        <p>To increase this number, you need to <strong>{{improvement}}</strong>.</p>
-                        {{/improvement}}
-                        <h4>Total cost</h4>
-                        <h3 class="card"><span class="currency">{{currency}}</span>{{cost}} per night</h3>
+                        <div class="span4">
+                            <h4>Outcomes</h4>
+                            <p>Based on this information, you can shelter:</p>
+                            <h3 class="card">{{capacity}} people</h3>
+                            <p>out of a total capacity of <strong>{{maxCapacity}}</strong>.</p>
+                            <div id="capacity-graph" class="progress">
+                                <div class="bar bar-success" style="width: {{percentCapacity}}">{{capacity}}</div>
+                                <div class="bar bar-warning" style="width: {{percentRemaining}}">{{remaining}}</div>
+                            </div>
+                            {{#improvement}}
+                            <p>To increase this number, you need to <strong>{{improvement}}</strong>.</p>
+                            {{/improvement}}
+                            <h4>Total cost</h4>
+                            <h3 class="card"><span class="currency">{{currency}}</span>{{cost}} per night</h3>
+                        </div>
                     </div>
-                </div>
                 </div>
 
                 <div class="row step-controls">
@@ -280,85 +305,117 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="page" id="discussion">
+                
+            </div>
 
             <div class="page" id="resources">
                 <h1>Resources</h1>
-		<h4>Safety Guidelines</h4>
-		<p>When the shelter is open, staff must be on duty. 
-        When on duty, all staff must be alert and attentive 
-        to the activities at the shelter. Sleeping when on duty
-        is prohibited.</p>
-        <p>Shelters must ensure that residents are safe and secure
-        within the facility. Entrances to the shelter must be
-        secured against unwanted entry. Emergency exits must
-        be equipped with an alarm to alert staff of unauthorized
-        comings and goings.
-        </p> 
-        <p> All shelters must designate an evacuation site. Evacuation
-        plans, which all staff are familiar with, must be in place
-        and explained to each resident upon admission or as
-        soon after as possible. Diagrams of the evacuation
-        plans must be posted in plain sight on the walls
-        and/or doors of all sleeping and communal areas.</p>
-        <p>Shelters must ensure that no environmental hazards such
-        as chemicals and cleaning compounds are present.
-        Hazardous materials and objects must be inaccessible
-        to residents. People using the hazardous materials
-        must be educated on the hazards associated with the
-        products used, and the safe handling, storage and 
-        disposal protocol for the products.</p> 
-        <p>Children may enter kitchen and laundry areas only
-        when accompanied by an adult.</p> 
-        <p>Mattresses must be covered with a flame-retardant
-        and moisture-retardant material. Window coverings,
-        upholstered furniture and any carpeting must be composed of materials that are flame-resistant and retardant.</p>
-        <p>Shelters must have a maintenance plan that clearly
-        specifies the manner in which cleaning, preventive
-        maintenance, emergency repairs, routine upkeep and
-        long-term replacements are to be done.</p>
+		        <h4>Safety Guidelines</h4>
+		        <p>When the shelter is open, staff must be on duty. 
+                When on duty, all staff must be alert and attentive 
+                to the activities at the shelter. Sleeping when on duty
+                is prohibited.</p>
+                <p>Shelters must ensure that residents are safe and secure
+                within the facility. Entrances to the shelter must be
+                secured against unwanted entry. Emergency exits must
+                be equipped with an alarm to alert staff of unauthorized
+                comings and goings.</p> 
+                <p> All shelters must designate an evacuation site. Evacuation
+                plans, which all staff are familiar with, must be in place
+                and explained to each resident upon admission or as
+                soon after as possible. Diagrams of the evacuation
+                plans must be posted in plain sight on the walls
+                and/or doors of all sleeping and communal areas.</p>
+                <p>Shelters must ensure that no environmental hazards such
+                as chemicals and cleaning compounds are present.
+                Hazardous materials and objects must be inaccessible
+                to residents. People using the hazardous materials
+                must be educated on the hazards associated with the
+                products used, and the safe handling, storage and 
+                disposal protocol for the products.</p> 
+                <p>Children may enter kitchen and laundry areas only
+                when accompanied by an adult.</p> 
+                <p>Mattresses must be covered with a flame-retardant and
+                moisture-retardant material. Window coverings, upholstered
+                furniture and any carpeting must be composed of materials that
+                are flame-resistant and retardant.</p>
+                <p>Shelters must have a maintenance plan that clearly
+                specifies the manner in which cleaning, preventive
+                maintenance, emergency repairs, routine upkeep and
+                long-term replacements are to be done.</p>
 
+                <h4>Dangers in Homeless Shelters</h4>
+                <h5>Rape:</h5>
+                <p>Some homeless shelters are designed specifically for women
+                and children; however, space is sometimes limited, and women are
+                forced to choose between staying in a coed shelter or sleeping
+                on the street. Both adult females and young girls stand the
+                chance of being raped at night in some coed shelters. If the
+                shelter is overcrowded, then staff and security can't keep an
+                eye on everyone.</p>
+                <h5>Stealing:</h5>
+                <p>Not all homeless people are in the exact same situation: some
+                are newly homeless while others have been on the streets for
+                years. Homeless people who carry around a certain amount of
+                possessions may be afraid to sleep in homeless shelters because
+                others might steal the few items they still have. Human
+                predators who literally have nothing may steal gloves, coats or
+                tiny amounts of money from other people trying to get some sleep
+                in the shelter.</p>
+                <h5>Violence:</h5>
+                <p>Homeless shelters may lack proper security. When a roomful of
+                tired, hungry and cold people get together, then it doesn't take
+                much for one person to get out of line and for a fight to break
+                out. People can get hurt or even killed when guns or knives are
+                involved. Sometimes mentally ill people in homeless shelters who
+                cannot afford their medication can lash out at others for no
+                reason at all.</p>
+                <h5>Sickness and Disease:</h5>
+                <p>Since homeless people lack medical care, a homeless shelter
+                can be filled with people with colds and the flu and other
+                sicknesses. These people are sleeping in close quarters, so the
+                odds of passing germs around the room is great. Some homeless
+                people may not even realize that they have a disease -- sexually
+                transmitted diseases, HIV -- and may pass the disease on to
+                other people who they meet through unprotected sex or shared
+                needle use.</p>
 
-        <h4>Dangers in Homeless Shelters</h4>
-        <h5>Rape:</h5>
-<p>Some homeless shelters are designed specifically for women and children; however, space is sometimes limited, and women are forced to choose between staying in a coed shelter or sleeping on the street. Both adult females and young girls stand the chance of being raped at night in some coed shelters. If the shelter is overcrowded, then staff and security can't keep an eye on everyone.</p>
-        <h5>Stealing:</h5>
-        <p>Not all homeless people are in the exact same situation: some are newly homeless while others have been on the streets for years. Homeless people who carry around a certain amount of possessions may be afraid to sleep in homeless shelters because others might steal the few items they still have. Human predators who literally have nothing may steal gloves, coats or tiny amounts of money from other people trying to get some sleep in the shelter.</p>
-        <h5>Violence:</h5>
-        <p>Homeless shelters may lack proper security. When a roomful of tired, hungry and cold people get together, then it doesn't take much for one person to get out of line and for a fight to break out. People can get hurt or even killed when guns or knives are involved. Sometimes mentally ill people in homeless shelters who cannot afford their medication can lash out at others for no reason at all.</p>
-        <h5>Sickness and Disease:</h5>
-        <p>Since homeless people lack medical care, a homeless shelter can be filled with people with colds and the flu and other sicknesses. These people are sleeping in close quarters, so the odds of passing germs around the room is great. Some homeless people may not even realize that they have a disease -- sexually transmitted diseases, HIV -- and may pass the disease on to other people who they meet through unprotected sex or shared needle use.</p>
+                <h4>Useful Software for Managing Homeless Shelters</h4>
+                <p>There exists software that can help track important
+                information related to residents, employees, volunteers, donors,
+                etc. that can streamline operating a shelter.</p>
+                <ul>
+                    <li><a href="http://www.clienttrack.com/focus-areas/homeless-services/">Client Track</a></li>
+                    <li><a href="http://mission-tracker.com/">missionTracker</a></li>
+                </ul>
 
-        <h4>Useful Software for Managing Homeless Shelters</h4>
-        <p>There exists software that can help track important information related to residents, employees, volunteers, donors, etc. that can streamline operating a shelter. </p>
-        <li><a href="http://www.clienttrack.com/focus-areas/homeless-services/">Client Track</a></li>
-        <li><a href="http://mission-tracker.com/">missionTracker</a></li>
+                <h4>Useful Contacts</h4>
+                <h5>ATLANTA:</h5>
+                <ul>
+                    <li><a href="http://portal.hud.gov/hudportal/HUD?src=/states/georgia/offices">U.S. Department of Housing and Urban Development: Georgia</a></li>
+                    <li><a href="http://www.homelessshelterdirectory.org/cgi-bin/id/shelter.cgi?shelter=11041">The Shepherd's Inn Shelter for Men</a></li>
+                    <li><a href="http://www.homelessshelterdirectory.org/cgi-bin/id/shelter.cgi?shelter=11043">My Sister's House for Women and Children</a></li>
+                    <li><a href="http://covenantatlanta.org/">Covenant Community</a></li>
+                    <li><a href="https://www.homeaidatlanta.org/">HomeAid Atlanta</a></li>
+                </ul>
+                <h5>BARCELONA:</h5>
+                <ul>
+                    <li><a href="http://www.arrelsfundacio.org/">Arrels Fundació</a></li>
+                    <li><a href="http://www.mellowhostelbarcelona.com/">Mellow Hostel and Homeless Shelter Barcelona</a></li>
+                </ul>
 
-        <h4>Useful Contacts</h4>
-        <p>ATLANTA:</p>
-        <li><a href="http://portal.hud.gov/hudportal/HUD?src=/states/georgia/offices">U.S. Department of Housing and Urban Development: Georgia</a></li>
-        <li><a href="http://www.homelessshelterdirectory.org/cgi-bin/id/shelter.cgi?shelter=11041">The Shepherd's Inn Shelter for Men</a></li>
-        <li><a href="http://www.homelessshelterdirectory.org/cgi-bin/id/shelter.cgi?shelter=11043">My Sister's House for Women and Children</a></li>
-        <li><a href="http://covenantatlanta.org/">Covenant Community</a></li>
-        <li><a href="https://www.homeaidatlanta.org/">HomeAid Atlanta</a></li>
-        <p></p>
-        <p>BARCELONA:</p>
-        <li><a href="http://www.arrelsfundacio.org/">Arrels Fundació</a></li>
-        <li><a href="http://www.mellowhostelbarcelona.com/">Mellow Hostel and Homeless Shelter Barcelona</a></li>
-
-        <p></p>
-        <p>Citations:</p>
-
-        <li><a href="http://www.toronto.ca/housing/pdf/shelter_standards.pdf">http://www.toronto.ca/housing/pdf/shelter_standards.pdf</a></li>
-        <li><a href="http://www.nyc.gov/html/dhs/html/faq/faq.shtml#12">http://www.nyc.gov/html/dhs/html/faq/faq.shtml#12</a></li>
-        <li><a href="http://www.nyc.gov/html/dhs/html/about/about.shtml">http://www.nyc.gov/html/dhs/html/about/about.shtml</a></li>
-
-
-            </div>
-
-
+                <h4>Citations:</h4>
+                <ul>
+                    <li><a href="http://www.toronto.ca/housing/pdf/shelter_standards.pdf">http://www.toronto.ca/housing/pdf/shelter_standards.pdf</a></li>
+                    <li><a href="http://www.nyc.gov/html/dhs/html/faq/faq.shtml#12">http://www.nyc.gov/html/dhs/html/faq/faq.shtml#12</a></li>
+                    <li><a href="http://www.nyc.gov/html/dhs/html/about/about.shtml">http://www.nyc.gov/html/dhs/html/about/about.shtml</a></li>
+                </ul>
+            </div> <!-- /resources page -->
 
             <hr>
-
+            
             <footer>
                 <p>&copy; 2013 Michael Limiero, Evan Cahill, Shyamak Aggarwal, Brian Daviadoff.
                 Licensed under the <a href="http://www.gnu.org/licenses/agpl.html">GNU Affero

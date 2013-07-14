@@ -18,6 +18,7 @@ $(function() {
         changePage(id);
     });
     $(".next-page").bind("click", function(e) {
+        console.log("called");
         var curPage = $(e.target).parents(".page");
         $(".page").hide();
         var curNav = $(".nav li.active");
@@ -85,7 +86,7 @@ function initForms() {
     var building_data;
     $.getJSON("data/cities.json").done(function(data) {
         city_data = data;
-        $.each(data, function(id,city) {$city_select.append("<option value='"+id+"'>"+city.name+"</option>");console.log(city);})
+        $.each(data, function(id,city) {$city_select.append("<option value='"+id+"'>"+city.name+"</option>");})
         if (building_data) $city_select.change();
     });
     
@@ -94,13 +95,15 @@ function initForms() {
         if (city_data) $city_select.change();
     });
     
+    //city updates
     $city_select.change(function() {
         var $step = $(this).parents(".step");
         var city = city_data[this.value];
         $step.find("img").attr("src", "img/"+city["image"]);
         $step.find(".stat-value").each(function(ind, stat) {
-            $(stat).html(city[$(stat).data("stat-type")]);
+            $(stat).text(city[$(stat).data("stat-type")]);
         });
+        
         //update buildings listing for city
         $building_select.children(":not(:first)").remove();
         $.each(building_data[this.value], function(id, building) {$building_select.append("<option value='"+id+"'>"+building.name+"</option>");})
@@ -109,14 +112,15 @@ function initForms() {
         if (city.currency !== undefined) $(".currency").text(city.currency);
     });
     
+    //building updates
     $building_select.change(function() {
         var $step = $(this).parents(".step");
         var building = building_data[$city_select.children("option:selected").val()][this.value];
         if (!building) { //undefined for the add your own option.
-            $step.find("img").css("visibility","hidden");
+            $step.find("img").hide();
             $step.find("input").val("").change();
         } else {
-            $step.find("img").attr("src", "img/"+building["image"]).css("visibility","visible");
+            $step.find("img").attr("src", "img/"+building["image"]).show();
             $step.find(".stat-value").each(function(ind, stat) {
                 $(stat).val(building[$(stat).data("stat-type")]).change();
             });

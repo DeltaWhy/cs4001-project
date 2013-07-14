@@ -58,7 +58,8 @@ function updateResults() {
     var goodCards = _.filter(_.values(cards), function(card) { return card.capacity >= maxCapacity });
     var badCards = _.filter(_.values(cards), function(card) { return card.capacity < maxCapacity });
 
-    $("#results").html(renderResults({
+    $("#results").children(":not(:last)").remove();
+    $("#results").prepend(renderResults({
         capacity: capacity,
         maxCapacity: maxCapacity,
         remaining: maxCapacity-capacity,

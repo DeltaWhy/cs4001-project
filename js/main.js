@@ -57,21 +57,25 @@ function changeStep(step) {
         $(".step-controls .btn.prev").show();
         $(".step-controls .btn.next").show();
     }
+    if ($(step).is("#building-step")) validateInputs();
 }
 
 function initSteps() {
     changeStep($(".step:first"));
     //next button
     $(".step-controls .btn.next").bind("click", function(e) {
-        changeStep($(".step:visible").next(".step"));
+        if (!$(e.target).hasClass("disabled"))
+            changeStep($(".step:visible").next(".step"));
     });
     //previous button
     $(".step-controls .btn.prev").bind("click", function(e) {
-        changeStep($(".step:visible").prev(".step"));
+        if (!$(e.target).hasClass("disabled"))
+            changeStep($(".step:visible").prev(".step"));
     });
     //reset button
     $(".step-controls .btn.restart").bind("click", function(e) {
-        changeStep($(".step:first"));
+        if (!$(e.target).hasClass("disabled"))
+            changeStep($(".step:first"));
     });
 }
 
@@ -111,6 +115,8 @@ function initForms() {
         $building_select.change();
 
         if (city.currency !== undefined) $(".currency").text(city.currency);
+
+        validateInputs();
     });
     
     //building updates
@@ -127,6 +133,8 @@ function initForms() {
             });
             $("#sqfoot-slider").slider("option", "max", building.area);
         }
+
+        validateInputs();
     });
 
     //set up sliders
@@ -139,6 +147,7 @@ function initForms() {
         step: 1,
         slide: function (event, ui) {
             $("#sqfoot").val(ui.value);
+            validateInputs();
         }
     });
     $("#sqfoot").on("change", function() {$("#sqfoot-slider").slider("value", this.value);});
@@ -151,9 +160,12 @@ function initForms() {
         step: 1,
         slide: function (event, ui) {
             $("#hours").val(ui.value);
+            validateInputs();
         }
     });
     $("#hours").on("change", function() {$("#hours-slider").slider("value", this.value);});
+
+    $("#building-step form").on("change", validateInputs);
     
     //Disqus initialization note: cities already populated
     var $disqus_city = $("#disqus-city");
@@ -214,4 +226,23 @@ function initForms() {
             }
         });
     });
+}
+
+function validateInputs() {
+    if (!$("#building-step").is(":visible")) {
+        $(".step-controls .btn.next").removeClass("disabled");
+        return;
+    }
+
+    var valid = true;
+    $("#building-step input").each(function(i,el) {
+        if (isNaN(parseFloat($(el).val()))) {
+            valid = false;
+        }
+    });
+    if (valid) {
+        $(".step-controls .btn.next").removeClass("disabled");
+    } else {
+        $(".step-controls .btn.next").addClass("disabled");
+    }
 }

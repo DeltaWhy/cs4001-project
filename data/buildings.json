@@ -8,6 +8,14 @@
             "sinks": 100,
             "hours": 12
         }
+        "one-georgia center": {
+            "name": "One Georgia Center",
+            "image": "",
+            "area": 345000,
+            "toilets": 100,
+            "sinks": 100,
+            "hours": 12
+        }
     },
     "barcelona": {
        "agbar": {
@@ -16,6 +24,14 @@
             "area": 50693,
             "toilets": 160,
             "sinks": 200,
+            "hours": 12
+        }
+        "torrelasagrera": {
+            "name": "Torre La Sagrera",
+            "image": "",
+            "area": 80000,
+            "toilets": 100,
+            "sinks": 50,
             "hours": 12
         }
     }

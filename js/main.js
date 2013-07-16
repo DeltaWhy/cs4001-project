@@ -212,14 +212,14 @@ function initForms() {
 
     $("#meta-thread").click(function(event) {
         event.preventDefault();
-        var identifier = "/meta" 
+        var identifier = "/meta"
         var title = "Discussion about /tmp/home";
 
         console.log("Changing thread to: " + identifier + "\n With title: "+title);
-        
+
         DISQUS.reset({
             reload: true,
-            config: function () {  
+            config: function () {
                 this.page.identifier = identifier;
                 this.page.url = "http://files.limiero.com/CS4001/#!" + identifier;
                 this.page.title = title;
@@ -236,7 +236,8 @@ function validateInputs() {
 
     var valid = true;
     $("#building-step input").each(function(i,el) {
-        if (isNaN(parseFloat($(el).val()))) {
+        var val = parseFloat($(el).val());
+        if (isNaN(val) || val < 0) {
             valid = false;
         }
     });

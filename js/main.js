@@ -197,4 +197,21 @@ function initForms() {
             }
         });
     });
+
+    $("#meta-thread").click(function(event) {
+        event.preventDefault();
+        var identifier = "/meta" 
+        var title = "Discussion about /tmp/home";
+
+        console.log("Changing thread to: " + identifier + "\n With title: "+title);
+        
+        DISQUS.reset({
+            reload: true,
+            config: function () {  
+                this.page.identifier = identifier;
+                this.page.url = "http://files.limiero.com/CS4001/#!" + identifier;
+                this.page.title = title;
+            }
+        });
+    });
 }

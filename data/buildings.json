@@ -7,10 +7,10 @@
             "toilets": 100,
             "sinks": 100,
             "hours": 12
-        }
-        "one-georgia center": {
+        },
+        "one-ga-center": {
             "name": "One Georgia Center",
-            "image": "",
+            "image": "one-ga-center.jpg",
             "area": 345000,
             "toilets": 100,
             "sinks": 100,
@@ -25,10 +25,10 @@
             "toilets": 160,
             "sinks": 200,
             "hours": 12
-        }
-        "torrelasagrera": {
+        },
+        "torre-sagrera": {
             "name": "Torre La Sagrera",
-            "image": "",
+            "image": "torre-sagrera.jpg",
             "area": 80000,
             "toilets": 100,
             "sinks": 50,

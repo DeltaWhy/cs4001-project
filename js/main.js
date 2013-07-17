@@ -29,6 +29,11 @@ function changePage(page) {
     if (page == "#simulation") {
         changeStep($(".step:first"));
     }
+    
+    if (page == "#discussion") {
+        $("#disqus-city").children("option:first").prop("selected",true);
+        $("#disqus-city").change();
+    }
 }
 
 function changeStep(step) {
@@ -158,15 +163,26 @@ function initForms() {
     });
     $("#hours").on("change", function() {$("#hours-slider").slider("value", this.value);});
 
+    //attach form validation handlers
     $("#building-step form").on("change", validateInputs);
     
-    //Disqus initialization note: cities already populated
+    //Disqus initialization. note: cities already populated when json recieved
     var $disqus_city = $("#disqus-city");
     var $disqus_building = $("#disqus-building").prop("disabled",true);
     
+    //handler to make disussion match city/building when coming from eval tool
+    $("#discussion-btn").click(function() {
+        $disqus_city.children("[value=" + $city_select.val() + "]").prop("selected",true);
+        $disqus_building.html($building_select.html()).prop("disabled",false);
+        if ($building_select.val()) { //selected a building
+            $disqus_building.children("[value=" + $building_select.val() + "]").prop("selected",true);
+        }
+        $disqus_building.change();
+    });
+    
     $disqus_city.change(function() {
         if (!$(this).val()) {
-            $disqus_building.prop("disabled",true);
+            $disqus_building.prop("disabled",true).children("option:first").prop("selected",true);
         } else {
             $disqus_building.children("option:not(:first)").remove();
             $.each(building_data[$(this).val()], function(id,building) {

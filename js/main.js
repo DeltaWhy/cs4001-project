@@ -57,7 +57,7 @@ function changeStep(step) {
         $(".step-controls .btn.prev").show();
         $(".step-controls .btn.next").show();
     }
-    if ($(step).is("#building-step")) validateInputs();
+    validateInputs();
 }
 
 function initSteps() {

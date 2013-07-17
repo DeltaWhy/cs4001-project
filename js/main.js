@@ -2,29 +2,17 @@
 $(function() {
     $(".page").hide();
     if (location.hash) {
-        $(location.hash).show();
-        $(".nav a[href="+location.hash+"]").parents("li").addClass("active");
         changePage(location.hash);
     } else {
         $(".page").eq(0).show();
         $(".nav li").eq(0).addClass("active");
     }
     $(".nav a, a.brand").bind("click", function(e) {
-        $(".page").hide();
         var id = $(e.target).attr("href");
-        $(id).show();
-        $(".nav li").removeClass("active");
-        $(e.target).parents("li").addClass("active");
         changePage(id);
     });
     $(".next-page").bind("click", function(e) {
-        console.log("called");
         var curPage = $(e.target).parents(".page");
-        $(".page").hide();
-        var curNav = $(".nav li.active");
-        $(".nav li").removeClass("active");
-        curPage.next(".page").show();
-        curNav.next("li").addClass("active");
         changePage("#" + curPage.next(".page").attr("id"));
     });
 
@@ -33,6 +21,11 @@ $(function() {
 });
 
 function changePage(page) {
+    $(".page").hide();
+    $(page).show();
+    $(".nav li.active").removeClass("active");
+    $(".nav a[href="+page+"]").parent("li").addClass("active");
+    
     if (page == "#simulation") {
         changeStep($(".step:first"));
     }

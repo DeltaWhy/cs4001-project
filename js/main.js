@@ -191,24 +191,25 @@ function initForms() {
                 title += " / " + building_data[city][building].name; 
             }      
         }
-        console.log("Changing thread to: " + identifier + "\n With title: "+title);
         
-        DISQUS.reset({
-            reload: true,
-            config: function () {  
-                this.page.identifier = identifier;
-                this.page.url = "http://files.limiero.com/CS4001/#!" + identifier;
-                this.page.title = title;
-            }
-        });
+        changeDisqusThread(identifier,title);
     });
 
     $("#meta-thread").click(function(event) {
         event.preventDefault();
-        var identifier = "/meta"
-        var title = "Discussion about /tmp/home";
+        $disqus_city.children().eq(0).prop("selected",true);
+        $disqus_building.prop("disabled",true).children().eq(0).prop("selected",true);
+        changeDisqusThread("/meta","Discussion about /tmp/home");
+    });
+    
+    //update title of current thread
+    $("#disqus-title").text("Homlessness Problem/Solution");
+}
 
+function changeDisqusThread(identifier, title) {
         console.log("Changing thread to: " + identifier + "\n With title: "+title);
+
+        $("#disqus-title").text(title);
 
         DISQUS.reset({
             reload: true,
@@ -218,7 +219,6 @@ function initForms() {
                 this.page.title = title;
             }
         });
-    });
 }
 
 function validateInputs() {

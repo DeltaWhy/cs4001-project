@@ -177,7 +177,7 @@ function initForms() {
         if ($building_select.val()) { //selected a building
             $disqus_building.children("[value=" + $building_select.val() + "]").prop("selected",true);
         }
-        $disqus_building.change();
+        $("#disqus-change").click();
     });
     
     $disqus_city.change(function() {
@@ -190,20 +190,22 @@ function initForms() {
             });
             $disqus_building.prop("disabled",false);
         }
-        $disqus_building.change();
     });
     
-    $disqus_building.change(function() {
+    $("#disqus-change").click(function() {
         //change Disqus thread
-        var city = $disqus_city.val() 
-        var building = $disqus_building.val();
         var identifier = "/general" 
         var title = "Homlessness Problem/Solution";
+        
+        var city = $disqus_city.val();
         if (city) {
+            console.log("City: "+city);
             identifier = "/" + city;
             title = "Homelessness in " + city_data[city].name;
+            var building = $disqus_building.val();
             if (building) {
-                identifier += "/" + building
+                console.log("Building: "+building);
+                identifier += "/" + building;
                 title += " / " + building_data[city][building].name; 
             }      
         }

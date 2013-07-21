@@ -5,6 +5,7 @@
     <tr>
         <td>{{name}}</td>
         <td><a href="cities/{{slug}}/edit" class="btn">Edit</a></td>
+        <td><a href="cities/{{slug}}/delete" class="btn btn-danger">Delete</a></td>
     </tr>
 {{/cities}}
 {{^cities}}
@@ -13,4 +14,5 @@
     </tr>
 {{/cities}}
 </table>
+<a href="/cs4001/admin/cities/new" class="btn btn-success">New city</a>
 {{> footer}}

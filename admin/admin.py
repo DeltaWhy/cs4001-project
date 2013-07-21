@@ -79,6 +79,7 @@ def logout():
 def debug_page():
     return "%s" % {'sessions': sessions, 'users': users}
 
+# CITIES
 @app.get(base+'cities')
 def cities_index():
     sess = session()
@@ -102,6 +103,65 @@ def edit_city(city):
             return renderer.render_name('edit_city', session=sess, city=view_city)
         else:
             abort(404, "No such city.")
+    else:
+        redirect('/cs4001/admin/login')
+
+@app.get(base+'cities/new')
+def new_city():
+    sess = session()
+    if sess:
+        return renderer.render_name('new_city', session=sess)
+    else:
+        redirect('/cs4001/admin/login')
+
+@app.post(base+'cities/<slug>')
+def update_city(slug):
+    sess = session()
+    if sess:
+        if slug in cities:
+            for key in cities[slug]:
+                form_key = key.replace('-','_')
+                if form_key in request.forms:
+                    cities[slug][key] = request.forms.decode()[form_key]
+
+            json.dump(cities, open(path('..', 'data', 'cities.json'), 'w'))
+            redirect('/cs4001/admin/cities')
+        else:
+            abort(404, "No such city.")
+    else:
+        redirect('/cs4001/admin/login')
+
+@app.get(base+'cities/<slug>/delete')
+def delete_city(slug):
+    sess = session()
+    if sess:
+        if slug in cities:
+            del(cities[slug])
+
+            json.dump(cities, open(path('..', 'data', 'cities.json'), 'w'))
+            redirect('/cs4001/admin/cities')
+        else:
+            abort(404, "No such city.")
+    else:
+        redirect('/cs4001/admin/login')
+
+@app.post(base+'cities')
+def create_city():
+    sess = session()
+    if sess:
+        city = {}
+        for key in request.forms.decode():
+            city[key.replace('_','-')] = request.forms.decode()[key]
+        slug = city['slug']
+
+        if slug in cities:
+            return renderer.render_name('new_city', session=sess, city=city, error="City already exists.")
+        else:
+            del(city['slug'])
+            cities[slug] = city
+
+            json.dump(cities, open(path('..', 'data', 'cities.json'), 'w'))
+            redirect('/cs4001/admin/cities')
     else:
         redirect('/cs4001/admin/login')
 

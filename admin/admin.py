@@ -19,13 +19,13 @@ renderer = pystache.Renderer(search_dirs=path('template'))
 sessions = {}
 
 if os.path.isfile(path('data', 'users.json')):
-    users = json.load(open(path('data', 'users.json')))
+    users = json.load(open(path('data', 'users.json'), encoding='utf8'))
 else:
     users = {'admin': {'username': 'admin', 'password': 'admin'}}
-    json.dump(users, open(path('data', 'users.json'), 'w'))
+    json.dump(users, open(path('data', 'users.json'), 'w', encoding='utf8'), ensure_ascii=False)
 
-cities = json.load(open(path('..','data','cities.json')))
-buildings = json.load(open(path('..','data','buildings.json')))
+cities = json.load(open(path('..','data','cities.json'), encoding='utf8'))
+buildings = json.load(open(path('..','data','buildings.json'), encoding='utf8'))
 
 # ROUTES
 @app.get(base)
@@ -111,7 +111,7 @@ def update_city(slug):
                 if form_key in request.forms:
                     cities[slug][key] = request.forms.decode()[form_key]
 
-            json.dump(cities, open(path('..', 'data', 'cities.json'), 'w'))
+            json.dump(cities, open(path('..', 'data', 'cities.json'), 'w', encoding='utf8'), ensure_ascii=False)
             redirect('/cs4001/admin/cities')
         else:
             abort(404, "No such city.")
@@ -125,7 +125,7 @@ def delete_city(slug):
         if slug in cities:
             del(cities[slug])
 
-            json.dump(cities, open(path('..', 'data', 'cities.json'), 'w'))
+            json.dump(cities, open(path('..', 'data', 'cities.json'), 'w', encoding='utf8'), ensure_ascii=False)
             redirect('/cs4001/admin/cities')
         else:
             abort(404, "No such city.")
@@ -147,7 +147,7 @@ def create_city():
             del(city['slug'])
             cities[slug] = city
 
-            json.dump(cities, open(path('..', 'data', 'cities.json'), 'w'))
+            json.dump(cities, open(path('..', 'data', 'cities.json'), 'w', encoding='utf8'), ensure_ascii=False)
             redirect('/cs4001/admin/cities')
     else:
         redirect('/cs4001/admin/login')

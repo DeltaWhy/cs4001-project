@@ -1,20 +1,24 @@
 //page setup
 $(function() {
-    $(".page").hide();
-    if (location.hash) {
-        changePage(location.hash);
-    } else {
-        $(".page").eq(0).show();
-        $(".nav li").eq(0).addClass("active");
-    }
+    if (!location.hash) history.replaceState(null,null,"#problem");
+    changePage(location.hash);
+    
     $(".nav a, a.brand").bind("click", function(e) {
         var id = $(e.target).attr("href");
+        history.pushState(null,null,id);
         changePage(id);
+        return false;
     });
+    
     $(".next-page").bind("click", function(e) {
-        var curPage = $(e.target).parents(".page");
-        changePage("#" + curPage.next(".page").attr("id"));
+        var id = "#" + $(e.target).parents(".page").next().attr("id").substring(5);
+        history.pushState(null,null,id);
+        changePage(id);
+        return false;
     });
+    
+    //history management
+    window.onhashchange = function(e) {changePage(location.hash);};
 
     initForms();
     initSteps();
@@ -22,7 +26,7 @@ $(function() {
 
 function changePage(page) {
     $(".page").hide();
-    $(page).show();
+    $("#page-"+page.substring(1)).show();
     $(".nav li.active").removeClass("active");
     $(".nav a[href="+page+"]").parent("li").addClass("active");
     
@@ -59,7 +63,7 @@ function changeStep(step) {
 }
 
 function initSteps() {
-    changeStep($(".step:first"));
+    
     //next button
     $(".step-controls .btn.next").bind("click", function(e) {
         if (!$(e.target).hasClass("disabled"))
@@ -242,7 +246,7 @@ function changeDisqusThread(identifier, title) {
 function validateInputs() {
     if (!$("#building-step").is(":visible")) {
         $(".step-controls .btn.next").removeClass("disabled");
-        return;
+        return true;
     }
 
     var valid = true;
@@ -257,4 +261,5 @@ function validateInputs() {
     } else {
         $(".step-controls .btn.next").addClass("disabled");
     }
+    return valid;
 }

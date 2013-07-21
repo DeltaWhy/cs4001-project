@@ -1,19 +1,20 @@
 #!/usr/bin/python3
 from bottle import route, run, static_file
+import pystache
+import os
 
 if __name__ == '__main__':
     base = '/admin'
+    os.chdir(os.path.dirname(__file__))
 else:
     base = ''
 
+renderer = pystache.Renderer(search_dirs='template')
+
 @route(base)
 @route(base+'/')
-def hello():
-    return 'ello admin'
-
-@route(base+'/<filename:re:(css|img|js)/.*>')
-def admin_static(filename):
-    return static_file(filename, root='.')
+def index():
+    return renderer.render_name('index')
 
 if __name__ == '__main__':
     @route('/')

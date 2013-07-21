@@ -16,6 +16,10 @@ sessions = {}
 
 # ROUTES
 @app.get(base)
+def root():
+    redirect(request.fullpath+'index')
+
+@app.get(base+'index')
 def index():
     return renderer.render_name('index')
 

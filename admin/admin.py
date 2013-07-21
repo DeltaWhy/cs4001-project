@@ -1,33 +1,34 @@
 #!/usr/bin/python3
-from bottle import route, run, static_file, request, response
+from bottle import Bottle, run, static_file, request, response, redirect
 import pystache
 import os
 import random
 
+app = Bottle()
+
 if __name__ == '__main__':
-    base = '/admin'
+    base = '/admin/'
 else:
-    base = ''
+    base = '/'
 
 renderer = pystache.Renderer(search_dirs=os.path.join(os.path.dirname(__file__), 'template'))
 sessions = {}
 
 # ROUTES
-@route(base)
-@route(base+'/')
+@app.get(base)
 def index():
     return renderer.render_name('index')
 
-@route(base+'/session')
+@app.get(base+'session')
 def get_session():
     return "%s" % session()
 
-@route(base+'/login')
+@app.get(base+'login')
 def login():
     create_session({'logged_in': True})
     return "Logged in."
 
-@route(base+'/logout')
+@app.get(base+'logout')
 def logout():
     destroy_session()
     return "Logged out."
@@ -55,10 +56,13 @@ def create_session(data={}):
     response.set_cookie('session_token', token)
 
 if __name__ == '__main__':
-    @route('/')
-    @route('/<filename:re:(css|img|js)/.*>')
+    @app.get('/')
+    @app.get('/<filename:re:(css|img|js)/.*>')
     def static(filename='index.html'):
         return static_file(filename, root='..')
+    @app.get('/admin')
+    def force_slash():
+        redirect('/admin/', 301)
 
 
-    run(host='localhost', port=8080, debug=True, reloader=True)
+    run(app, host='localhost', port=8080, debug=True, reloader=True)

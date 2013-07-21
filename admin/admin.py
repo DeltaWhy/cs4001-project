@@ -3,19 +3,7 @@ from bottle import Bottle, run, static_file, request, response, redirect, abort
 import pystache
 import os
 import random
-import logging
 import json
-
-rootLogger = logging.getLogger()
-rootLogger.setLevel(logging.DEBUG)
-fh = logging.FileHandler('admin.log')
-fh.setLevel(logging.INFO)
-fh.setFormatter(logging.Formatter(fmt="%(asctime)s %(name)s [%(levelname)s]: %(message)s"))
-ch = logging.StreamHandler()
-ch.setLevel(logging.INFO)
-rootLogger.addHandler(fh)
-rootLogger.addHandler(ch)
-logger = logging.getLogger(__name__)
 
 app = Bottle()
 
@@ -33,7 +21,6 @@ sessions = {}
 if os.path.isfile(path('data', 'users.json')):
     users = json.load(open(path('data', 'users.json')))
 else:
-    logger.info("Creating users.json")
     users = {'admin': {'username': 'admin', 'password': 'admin'}}
     json.dump(users, open(path('data', 'users.json'), 'w'))
 

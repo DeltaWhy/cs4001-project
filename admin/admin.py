@@ -3,6 +3,19 @@ from bottle import Bottle, run, static_file, request, response, redirect
 import pystache
 import os
 import random
+import logging
+import json
+
+rootLogger = logging.getLogger()
+rootLogger.setLevel(logging.DEBUG)
+fh = logging.FileHandler('admin.log')
+fh.setLevel(logging.INFO)
+fh.setFormatter(logging.Formatter(fmt="%(asctime)s %(name)s [%(levelname)s]: %(message)s"))
+ch = logging.StreamHandler()
+ch.setLevel(logging.INFO)
+rootLogger.addHandler(fh)
+rootLogger.addHandler(ch)
+logger = logging.getLogger(__name__)
 
 app = Bottle()
 
@@ -13,8 +26,18 @@ else:
     base = '/'
     redirectbase = '/cs4001/admin/'
 
-renderer = pystache.Renderer(search_dirs=os.path.join(os.path.dirname(__file__), 'template'))
+def path(*components):
+    return os.path.join(os.path.dirname(__file__), *components)
+
+renderer = pystache.Renderer(search_dirs=path('template'))
 sessions = {}
+
+if os.path.isfile(path('data', 'users.json')):
+    users = json.load(open(path('data', 'users.json')))
+else:
+    logger.info("Creating users.json")
+    users = {'admin': {'username': 'admin', 'password': 'admin'}}
+    json.dump(users, open(path('data', 'users.json'), 'w'))
 
 # ROUTES
 @app.get(base)
@@ -29,10 +52,6 @@ def index():
     else:
         redirect(redirectbase+'login')
 
-@app.get(base+'session')
-def get_session():
-    return "%s" % session()
-
 @app.get(base+'login')
 def login():
     sess = session()
@@ -43,8 +62,9 @@ def login():
 
 @app.post(base+'login')
 def do_login():
-    if request.forms.username == 'admin' and request.forms.password == 'admin':
-        create_session({'logged_in': True})
+    if request.forms.username in users and\
+            users[request.forms.username]['password'] == request.forms.password:
+        create_session({'user': users[request.forms.username]})
         redirect(redirectbase+'index')
     else:
         return renderer.render_name('login', error="Invalid username or password.")
@@ -53,6 +73,10 @@ def do_login():
 def logout():
     destroy_session()
     return renderer.render_name('logout')
+
+@app.get(base+'debug')
+def debug_page():
+    return "%s" % {'sessions': sessions, 'users': users}
 
 # SESSION
 def session():
@@ -84,6 +108,5 @@ if __name__ == '__main__':
     @app.get('/admin')
     def force_slash():
         redirect('/admin/', 301)
-
 
     run(app, host='localhost', port=8080, debug=True, reloader=True)

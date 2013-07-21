@@ -1,0 +1,16 @@
+{{> header}}
+<h1>Cities</h1>
+<table class="table">
+{{#cities}}
+    <tr>
+        <td>{{name}}</td>
+        <td><a href="cities/{{slug}}/edit" class="btn">Edit</a></td>
+    </tr>
+{{/cities}}
+{{^cities}}
+    <tr>
+        <td class="no-data">No cities</td>
+    </tr>
+{{/cities}}
+</table>
+{{> footer}}

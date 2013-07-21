@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from bottle import Bottle, run, static_file, request, response, redirect
+from bottle import Bottle, run, static_file, request, response, redirect, abort
 import pystache
 import os
 import random
@@ -20,11 +20,9 @@ logger = logging.getLogger(__name__)
 app = Bottle()
 
 if __name__ == '__main__':
-    base = '/admin/'
-    redirectbase = '/admin/'
+    base = '/cs4001/admin/'
 else:
     base = '/'
-    redirectbase = '/cs4001/admin/'
 
 def path(*components):
     return os.path.join(os.path.dirname(__file__), *components)
@@ -39,10 +37,13 @@ else:
     users = {'admin': {'username': 'admin', 'password': 'admin'}}
     json.dump(users, open(path('data', 'users.json'), 'w'))
 
+cities = json.load(open(path('..','data','cities.json')))
+buildings = json.load(open(path('..','data','buildings.json')))
+
 # ROUTES
 @app.get(base)
 def root():
-    redirect(redirectbase+'index')
+    redirect('/cs4001/admin/index')
 
 @app.get(base+'index')
 def index():
@@ -50,22 +51,22 @@ def index():
     if sess:
         return renderer.render_name('index', session=sess)
     else:
-        redirect(redirectbase+'login')
+        redirect('/cs4001/admin/login')
 
 @app.get(base+'login')
 def login():
     sess = session()
     if sess:
-        redirect(redirectbase+'index')
+        redirect('/cs4001/admin/index')
     else:
         return renderer.render_name('login')
 
 @app.post(base+'login')
 def do_login():
-    if request.forms.username in users and\
+    if request.forms.username in users and \
             users[request.forms.username]['password'] == request.forms.password:
         create_session({'user': users[request.forms.username]})
-        redirect(redirectbase+'index')
+        redirect('/cs4001/admin/index')
     else:
         return renderer.render_name('login', error="Invalid username or password.")
 
@@ -77,6 +78,32 @@ def logout():
 @app.get(base+'debug')
 def debug_page():
     return "%s" % {'sessions': sessions, 'users': users}
+
+@app.get(base+'cities')
+def cities_index():
+    sess = session()
+    if sess:
+        view_cities = []
+        for k,v in cities.items():
+            view_city = v.copy()
+            view_city['slug'] = k
+            view_cities.append(view_city)
+        return renderer.render_name('cities', session=sess, cities=view_cities)
+    else:
+        redirect('/cs4001/admin/login')
+
+@app.get(base+'cities/<city>/edit')
+def edit_city(city):
+    sess = session()
+    if sess:
+        if city in cities:
+            view_city = cities[city].copy()
+            view_city['slug'] = city
+            return renderer.render_name('edit_city', session=sess, city=view_city)
+        else:
+            abort(404, "No such city.")
+    else:
+        redirect('/cs4001/admin/login')
 
 # SESSION
 def session():
@@ -101,12 +128,18 @@ def create_session(data={}):
     response.set_cookie('session_token', token)
 
 if __name__ == '__main__':
-    @app.get('/')
-    @app.get('/<filename:re:(css|img|js)/.*>')
+    @app.get('/cs4001')
+    @app.get('/cs4001/')
+    @app.get('/cs4001/<filename:re:(css|img|js|data)/.*>')
     def static(filename='index.html'):
         return static_file(filename, root='..')
-    @app.get('/admin')
+
+    @app.get('/')
+    def project_root():
+        redirect('/cs4001/')
+
+    @app.get('/cs4001/admin')
     def force_slash():
-        redirect('/admin/', 301)
+        redirect('/cs4001/admin/', 301)
 
     run(app, host='localhost', port=8080, debug=True, reloader=True)

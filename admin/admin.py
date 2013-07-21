@@ -8,8 +8,10 @@ app = Bottle()
 
 if __name__ == '__main__':
     base = '/admin/'
+    redirectbase = '/admin/'
 else:
     base = '/'
+    redirectbase = '/cs4001/admin/'
 
 renderer = pystache.Renderer(search_dirs=os.path.join(os.path.dirname(__file__), 'template'))
 sessions = {}
@@ -17,11 +19,15 @@ sessions = {}
 # ROUTES
 @app.get(base)
 def root():
-    redirect(request.fullpath+'index')
+    redirect(redirectbase+'index')
 
 @app.get(base+'index')
 def index():
-    return renderer.render_name('index')
+    sess = session()
+    if sess:
+        return renderer.render_name('index', session=sess)
+    else:
+        redirect(redirectbase+'login')
 
 @app.get(base+'session')
 def get_session():
@@ -29,13 +35,24 @@ def get_session():
 
 @app.get(base+'login')
 def login():
-    create_session({'logged_in': True})
-    return "Logged in."
+    sess = session()
+    if sess:
+        redirect(redirectbase+'index')
+    else:
+        return renderer.render_name('login')
+
+@app.post(base+'login')
+def do_login():
+    if request.forms.username == 'admin' and request.forms.password == 'admin':
+        create_session({'logged_in': True})
+        redirect(redirectbase+'index')
+    else:
+        return renderer.render_name('login', error="Invalid username or password.")
 
 @app.get(base+'logout')
 def logout():
     destroy_session()
-    return "Logged out."
+    return renderer.render_name('logout')
 
 # SESSION
 def session():

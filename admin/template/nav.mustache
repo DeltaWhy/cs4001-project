@@ -7,6 +7,7 @@
                         <span class="icon-bar"></span>
                     </a>
                     <a class="brand" href="">/tmp/home <span class="admin-subtitle">Admin</span></a>
+                    {{#session}}
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                             <li><a href="cities">Cities</a></li>
@@ -14,6 +15,7 @@
                         </ul>
                         <p class="navbar-text pull-right"><a class="navbar-link" href="logout">Log out</a></p>
                     </div><!--/.nav-collapse -->
+                    {{/session}}
                 </div>
             </div>
         </div>

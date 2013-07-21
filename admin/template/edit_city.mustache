@@ -1,0 +1,59 @@
+{{> header}}
+<h1>Edit {{city.slug}}</h1>
+<form action="/cs4001/admin/cities/{{city.slug}}" method="POST" class="form-horizontal">
+    <div class="control-group">
+        <label class="control-label" for="name">Name</label>
+        <div class="controls">
+            <input type="text" id="name" name="name" value="{{city.name}}" />
+        </div>
+    </div>
+    {{! TODO - image }}
+    <div class="control-group">
+        <label class="control-label" for="population">Population</label>
+        <div class="controls">
+            <input type="text" id="population" name="population" value="{{city.population}}" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="area">Area</label>
+        <div class="controls">
+            <input type="text" id="area" name="area" value="{{city.area}}" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="homeless_total">Number of homeless</label>
+        <div class="controls">
+            <input type="text" id="homeless_total" name="homeless_total" value="{{city.homeless-total}}" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="homeless_proportion">Homeless per 1000 residents</label>
+        <div class="controls">
+            <input type="text" id="homeless_proportion" name="homeless_proportion" value="{{city.homeless-proportion}}" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="homeless_density">Homeless per square mile</label>
+        <div class="controls">
+            <input type="text" id="homeless_density" name="homeless_density" value="{{city.homeless-density}}" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="laws">Laws</label>
+        <div class="controls">
+            <textarea id="laws" name="laws">{{city.laws}}</textarea>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="currency">Currency symbol</label>
+        <div class="controls">
+            <input type="text" id="currency" name="currency" value="{{city.currency}}" />
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn btn-success">Save</button>
+        </div>
+    </div>
+</form>
+{{> footer}}

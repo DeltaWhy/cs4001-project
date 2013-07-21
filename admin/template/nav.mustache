@@ -1,0 +1,21 @@
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="">/tmp/home <span class="admin-subtitle">Admin</span></a>
+                    {{#session}}
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li><a href="cities">Cities</a></li>
+                            <li><a href="buildings">Buildings</a></li>
+                        </ul>
+                        <p class="navbar-text pull-right"><a class="navbar-link" href="logout">Log out</a></p>
+                    </div><!--/.nav-collapse -->
+                    {{/session}}
+                </div>
+            </div>
+        </div>

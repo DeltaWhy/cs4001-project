@@ -1,0 +1,29 @@
+{{> header}}
+<h1>Buildings</h1>
+<table class="table">
+{{#cities}}
+    <tr>
+        <th colspan="3">{{name}}</th>
+        <th><a href="/cs4001/admin/buildings/{{slug}}/new" class="btn btn-success">New building</a></th>
+    </tr>
+    {{#buildings}}
+        <tr>
+            <td>{{name}}</td>
+            <td>{{city_name}}</td>
+            <td><a href="buildings/{{city}}/{{slug}}/edit" class="btn">Edit</a></td>
+            <td><a href="buildings/{{city}}/{{slug}}/delete" class="btn btn-danger">Delete</a></td>
+        </tr>
+    {{/buildings}}
+    {{^buildings}}
+        <tr>
+            <td class="no-data">No buildings</td>
+        </tr>
+    {{/buildings}}
+{{/cities}}
+{{^cities}}
+    <tr>
+        <td class="no-data">No cities</td>
+    </tr>
+{{/cities}}
+</table>
+{{> footer}}

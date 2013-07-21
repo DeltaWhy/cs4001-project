@@ -5,11 +5,10 @@ import os
 
 if __name__ == '__main__':
     base = '/admin'
-    os.chdir(os.path.dirname(__file__))
 else:
     base = ''
 
-renderer = pystache.Renderer(search_dirs='template')
+renderer = pystache.Renderer(search_dirs=os.path.join(os.path.dirname(__file__), 'template'))
 
 @route(base)
 @route(base+'/')

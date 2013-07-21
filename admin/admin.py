@@ -157,15 +157,20 @@ def create_city():
 def buildings_index():
     sess = session()
     if sess:
-        view_buildings = []
-        for k,v in buildings.items():
-            for k2, v2 in v.items():
+        view_cities = []
+        for k,v in cities.items():
+            view_city = v.copy()
+            view_city['slug'] = k
+            view_buildings = []
+            for k2, v2 in buildings[k].items():
                 view_building = v2.copy()
                 view_building['city'] = k
-                view_building['city_name'] = cities[k]['name']
+                view_building['city_name'] = v['name']
                 view_building['slug'] = k2
                 view_buildings.append(view_building)
-        return renderer.render_name('buildings', session=sess, buildings=view_buildings)
+            view_city['buildings'] = view_buildings
+            view_cities.append(view_city)
+        return renderer.render_name('buildings', session=sess, cities=view_cities)
     else:
         redirect('/cs4001/admin/login')
 
@@ -189,8 +194,10 @@ def edit_building(city, building):
 def new_building(city):
     sess = session()
     if sess:
-        if city in buildings:
-            return renderer.render_name('new_building', session=sess, city=city)
+        if city in cities and city in buildings:
+            view_city = cities[city].copy()
+            view_city['slug'] = city
+            return renderer.render_name('new_building', session=sess, city=view_city)
         else:
             abort(404, "No such city.")
     else:

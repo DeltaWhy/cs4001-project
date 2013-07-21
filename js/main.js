@@ -4,6 +4,10 @@ $(function() {
     changePage(location.hash);
     
     $(".nav a, a.brand").bind("click", function(e) {
+        if ($(".page:visible").is("#page-simulation")) { //currently in a step
+            console.log("Saving");
+            history.replaceState(newStepState(),null,"#simulation"); //save the current step
+        }
         var id = $(e.target).attr("href");
         history.pushState(null,null,id);
         changePage(id);
@@ -18,7 +22,10 @@ $(function() {
     });
     
     //history management
-    window.onhashchange = function(e) {changePage(location.hash);};
+    window.onpopstate = function(e) {
+        console.log("popstate");
+        changePage(location.hash);
+    };
 
     initForms();
     initSteps();
@@ -31,12 +38,37 @@ function changePage(page) {
     $(".nav a[href="+page+"]").parent("li").addClass("active");
     
     if (page == "#simulation") {
-        changeStep($(".step:first"));
+        if (history.state) {
+            //repopulate relevent stuff
+            console.log("Repopulating: "+JSON.stringify(history.state));
+            $("#city-sel").children("option[value="+history.state.city+"]").prop("selected",true);
+            $("#city-sel").change();
+            $("#building-sel").children("option[value="+history.state.building+"]").prop("selected",true);
+            $("#building-sel").change();
+            $("#building-info input").each(function(ind) {
+                $(this).val(history.state.inputs[ind]);
+            });
+            changeStep($(".step").eq(history.state.step));
+        } else {
+            $("#city-sel option").eq(0).prop("selected", true).parent().change();
+            changeStep($(".step:first"));
+        }
     }
     
     if (page == "#discussion") {
-        $("#disqus-city").children("option:first").prop("selected",true);
-        $("#disqus-city").change();
+        console.log("dis");
+        console.log(history.state);
+        if (history.state) {
+            console.log("here");
+            $("#disqus-city").children("option[value="+history.state.city+"]").prop("selected",true);
+            $("#disqus-city").change();
+            $("#disqus-building").children("option[value="+history.state.building+"]").prop("selected",true);
+            $("#disqus-change").click();
+        } else {
+            $("#disqus-city").children("option:first").prop("selected",true);
+            $("#disqus-city").change();
+            $("#disqus-change").click();
+        }
     }
 }
 
@@ -66,18 +98,27 @@ function initSteps() {
     
     //next button
     $(".step-controls .btn.next").bind("click", function(e) {
-        if (!$(e.target).hasClass("disabled"))
+        if (!$(e.target).hasClass("disabled")) {
+            history.replaceState(newStepState(),null,"#simulation");
             changeStep($(".step:visible").next(".step"));
+            history.pushState(newStepState(),null,"#simulation");
+        }
     });
     //previous button
     $(".step-controls .btn.prev").bind("click", function(e) {
-        if (!$(e.target).hasClass("disabled"))
+        if (!$(e.target).hasClass("disabled")) {
+            history.replaceState(newStepState(),null,"#simulation");
             changeStep($(".step:visible").prev(".step"));
+            history.pushState(newStepState(),null,"#simulation");
+        }
     });
     //reset button
     $(".step-controls .btn.restart").bind("click", function(e) {
-        if (!$(e.target).hasClass("disabled"))
+        if (!$(e.target).hasClass("disabled")) {
+            $("#city-sel option").eq(0).prop("selected", true).parent().change();
             changeStep($(".step:first"));
+            history.pushState(newStepState(),null,"#simulation");
+        }
     });
 }
 
@@ -117,8 +158,6 @@ function initForms() {
         $building_select.change();
 
         if (city.currency !== undefined) $(".currency").text(city.currency);
-
-        validateInputs();
     });
     
     //building updates
@@ -175,13 +214,9 @@ function initForms() {
     var $disqus_building = $("#disqus-building").prop("disabled",true);
     
     //handler to make disussion match city/building when coming from eval tool
-    $("#discussion-btn").click(function() {
-        $disqus_city.children("[value=" + $city_select.val() + "]").prop("selected",true);
-        $disqus_building.html($building_select.html()).prop("disabled",false);
-        if ($building_select.val()) { //selected a building
-            $disqus_building.children("[value=" + $building_select.val() + "]").prop("selected",true);
-        }
-        $("#disqus-change").click();
+    $("#discussion-btn").click(function(e) {
+        history.pushState({"city":$city_select.val(),"building":$building_select.val()},null,"#discussion");
+        changePage("#discussion");
     });
     
     $disqus_city.change(function() {
@@ -200,7 +235,6 @@ function initForms() {
         //change Disqus thread
         var identifier = "/general" 
         var title = "Homlessness Problem/Solution";
-        
         var city = $disqus_city.val();
         if (city) {
             console.log("City: "+city);
@@ -262,4 +296,16 @@ function validateInputs() {
         $(".step-controls .btn.next").addClass("disabled");
     }
     return valid;
+}
+
+//State Object Template
+//{"step":the step number, "city":city, "building":building, 
+//"inputs":an array of values for each input in the form,
+function newStepState() {
+    return {
+        "step": $(".step:visible").index(),
+        "city": $("#city-sel").val(),
+        "building": $("#building-sel").val(),
+        "inputs": $("#building-info input").map(function(){return this.value}).get()
+    };
 }

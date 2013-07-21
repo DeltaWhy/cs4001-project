@@ -152,6 +152,109 @@ def create_city():
     else:
         redirect('/cs4001/admin/login')
 
+# BUILDINGS
+@app.get(base+'buildings')
+def buildings_index():
+    sess = session()
+    if sess:
+        view_buildings = []
+        for k,v in buildings.items():
+            for k2, v2 in v.items():
+                view_building = v2.copy()
+                view_building['city'] = k
+                view_building['city_name'] = cities[k]['name']
+                view_building['slug'] = k2
+                view_buildings.append(view_building)
+        return renderer.render_name('buildings', session=sess, buildings=view_buildings)
+    else:
+        redirect('/cs4001/admin/login')
+
+@app.get(base+'buildings/<city>/<building>/edit')
+def edit_building(city, building):
+    sess = session()
+    if sess:
+        if city in buildings and building in buildings[city]:
+            view_building = buildings[city][building].copy()
+            view_building['city'] = city
+            view_building['slug'] = building
+            return renderer.render_name('edit_building', session=sess, building=view_building)
+        elif city in buildings:
+            abort(404, "No such building.")
+        else:
+            abort(404, "No such city.")
+    else:
+        redirect('/cs4001/admin/login')
+
+@app.get(base+'buildings/<city>/new')
+def new_building(city):
+    sess = session()
+    if sess:
+        if city in buildings:
+            return renderer.render_name('new_building', session=sess, city=city)
+        else:
+            abort(404, "No such city.")
+    else:
+        redirect('/cs4001/admin/login')
+
+@app.post(base+'buildings/<city>/<slug>')
+def update_building(city, slug):
+    sess = session()
+    if sess:
+        if city in buildings and slug in buildings[city]:
+            for key in buildings[city][slug]:
+                form_key = key.replace('-','_')
+                if form_key in request.forms:
+                    buildings[city][slug][key] = request.forms.decode()[form_key]
+
+            json.dump(buildings, open(path('..', 'data', 'buildings.json'), 'w', encoding='utf8'), ensure_ascii=False)
+            redirect('/cs4001/admin/buildings')
+        elif city in buildings:
+            abort(404, "No such building.")
+        else:
+            abort(404, "No such city.")
+    else:
+        redirect('/cs4001/admin/login')
+
+@app.get(base+'buildings/<city>/<slug>/delete')
+def delete_building(city, slug):
+    sess = session()
+    if sess:
+        if city in buildings and slug in buildings[city]:
+            del(buildings[city][slug])
+
+            json.dump(buildings, open(path('..', 'data', 'buildings.json'), 'w', encoding='utf8'), ensure_ascii=False)
+            redirect('/cs4001/admin/buildings')
+        elif city in buildings:
+            abort(404, "No such building.")
+        else:
+            abort(404, "No such city.")
+    else:
+        redirect('/cs4001/admin/login')
+
+@app.post(base+'buildings')
+def create_building():
+    sess = session()
+    if sess:
+        building = {}
+        for key in request.forms.decode():
+            building[key.replace('_','-')] = request.forms.decode()[key]
+        slug = building['slug']
+        city = building['city']
+
+        if city in buildings and slug in buildings[city]:
+            return renderer.render_name('new_building', session=sess, building=building, error="Building already exists.")
+        elif not(city in buildings):
+            abort(404, "No such city.")
+        else:
+            del(building['slug'])
+            del(building['city'])
+            buildings[city][slug] = building
+
+            json.dump(buildings, open(path('..', 'data', 'buildings.json'), 'w', encoding='utf8'), ensure_ascii=False)
+            redirect('/cs4001/admin/buildings')
+    else:
+        redirect('/cs4001/admin/login')
+
 # SESSION
 def session():
     token = request.get_cookie('session_token')

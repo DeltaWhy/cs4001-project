@@ -4,6 +4,7 @@ import pystache
 import os
 import random
 import json
+import re
 
 app = Bottle()
 
@@ -141,7 +142,11 @@ def create_city():
             city[key.replace('_','-')] = request.forms.decode()[key]
         slug = city['slug']
 
-        if slug in cities:
+        if not(slug):
+            return renderer.render_name('new_city', session=sess, city=city, error="URL slug cannot be blank.")
+        elif not(re.match("^[A-Za-z0-9-_]+$", slug)):
+            return renderer.render_name('new_city', session=sess, city=city, error="URL slug can only contain alphanumeric characters, hyphens, and underscores.")
+        elif slug in cities:
             return renderer.render_name('new_city', session=sess, city=city, error="City already exists.")
         else:
             del(city['slug'])
@@ -248,7 +253,11 @@ def create_building():
         slug = building['slug']
         city = building['city']
 
-        if city in buildings and slug in buildings[city]:
+        if not(slug):
+            return renderer.render_name('new_building', session=sess, building=building, error="URL slug cannot be blank.")
+        elif not(re.match("^[A-Za-z0-9-_]+$", slug)):
+            return renderer.render_name('new_building', session=sess, building=building, error="URL slug can only contain alphanumeric characters, hyphens, and underscores.")
+        elif city in buildings and slug in buildings[city]:
             return renderer.render_name('new_building', session=sess, building=building, error="Building already exists.")
         elif not(city in buildings):
             abort(404, "No such city.")

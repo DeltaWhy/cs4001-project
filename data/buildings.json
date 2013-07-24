@@ -1,1 +1,86 @@
-{"atlanta": {"gt-klaus": {"toilets": 100, "sinks": 100, "area": 414000, "image": "gt-klaus.jpg", "hours": 12, "name": "Klaus Advanced Computing Building"}, "peachtree": {"toilets": "100", "sinks": "119", "area": "618,000 sq ft", "hours": "12", "name": "1100 Peachtree"}, "one-ga-center": {"toilets": 100, "sinks": 100, "area": 345000, "image": "one-ga-center.jpg", "hours": 12, "name": "One Georgia Center"}, "atlantic-center": {"toilets": "100", "sinks": "120", "area": "1,100,000 sq ft", "hours": "12", "name": "One Atlantic Center"}, "suntrust-plaza": {"toilets": "100", "sinks": "130", "area": "1,199,000 sq ft", "hours": "12", "name": "Sun Trust Plaza"}}, "barcelona": {"torre-sagrera": {"toilets": "100", "sinks": "50", "area": "853,700 sq ft", "image": "torre-sagrera.jpg", "hours": "12", "name": "Torre La Sagrera"}, "torre-inbisa": {"toilets": "100", "sinks": "110", "area": "215,280 sq ft", "hours": "12", "name": "Torre Inbisa"}, "agbar": {"toilets": "160", "sinks": "200", "area": "50693", "image": "agbar.jpg", "hours": "12", "name": "Torre Agbar"}, "torre-mapfre": {"hours": "12", "toilets": "100", "sinks": "100", "name": "Torre Mapfre", "area": "479,590 sq ft"}, "torre-realia": {"toilets": "100", "sinks": "101", "area": "489,000 sq ft", "hours": "12", "name": "Torre Realia BCN"}}}
+{
+  "barcelona": {
+    "torre-realia": {
+      "name": "Torre Realia BCN",
+      "image": "Torre_Realia_BCN.jpg",
+      "hours": "12",
+      "area": "489,000 sq ft",
+      "sinks": "101",
+      "toilets": "100"
+    },
+    "torre-mapfre": {
+      "area": "479,590 sq ft",
+      "image": "Torre_Mapfre.JPG",
+      "name": "Torre Mapfre",
+      "sinks": "100",
+      "toilets": "100",
+      "hours": "12"
+    },
+    "agbar": {
+      "name": "Torre Agbar",
+      "hours": "12",
+      "image": "agbar.jpg",
+      "area": "50693",
+      "sinks": "200",
+      "toilets": "160"
+    },
+    "torre-inbisa": {
+      "name": "Torre Inbisa",
+      "image": "Torre_Inbisa.JPG",
+      "hours": "12",
+      "area": "215,280 sq ft",
+      "sinks": "110",
+      "toilets": "100"
+    },
+    "torre-sagrera": {
+      "name": "Torre La Sagrera",
+      "hours": "12",
+      "image": "torre-sagrera.jpg",
+      "area": "853,700 sq ft",
+      "sinks": "50",
+      "toilets": "100"
+    }
+  },
+  "atlanta": {
+    "suntrust-plaza": {
+      "name": "Sun Trust Plaza",
+      "image": "SunTrustPlaza.jpg",
+      "hours": "12",
+      "area": "1,199,000 sq ft",
+      "sinks": "130",
+      "toilets": "100"
+    },
+    "atlantic-center": {
+      "name": "One Atlantic Center",
+      "image": "OneAtlanticCenter.jpg",
+      "hours": "12",
+      "area": "1,100,000 sq ft",
+      "sinks": "120",
+      "toilets": "100"
+    },
+    "one-ga-center": {
+      "name": "One Georgia Center",
+      "hours": 12,
+      "image": "one-ga-center.jpg",
+      "area": 345000,
+      "sinks": 100,
+      "toilets": 100
+    },
+    "peachtree": {
+      "name": "1100 Peachtree",
+      "image": "1100_Peachtree.jpg",
+      "hours": "12",
+      "area": "618,000 sq ft",
+      "sinks": "119",
+      "toilets": "100"
+    },
+    "gt-klaus": {
+      "name": "Klaus Advanced Computing Building",
+      "hours": 12,
+      "image": "gt-klaus.jpg",
+      "area": 414000,
+      "sinks": 100,
+      "toilets": 100
+    }
+  }
+}

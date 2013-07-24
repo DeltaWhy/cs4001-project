@@ -1,6 +1,17 @@
 //page setup
 $(function() {
     if (!location.hash) history.replaceState(null,null,"#problem");
+    if (location.hash[1] == '!') { //handle the disqus stupid hashbangs
+        var params = location.hash.split("/");
+        var state = {};
+        if (params[1] == "meta") {
+            state.isMeta = true;
+        } else if (params[1] != "general") {
+            state.city = params[1];
+            state.building = params[2];        
+        }
+        history.replaceState(state,null,"#discussion");
+    }
     changePage(location.hash);
     
     $(".nav a, a.brand").bind("click", function(e) {
@@ -56,14 +67,15 @@ function changePage(page) {
     }
     
     if (page == "#discussion") {
-        console.log("dis");
-        console.log(history.state);
         if (history.state) {
-            console.log("here");
-            $("#disqus-city").children("option[value="+history.state.city+"]").prop("selected",true);
-            $("#disqus-city").change();
-            $("#disqus-building").children("option[value="+history.state.building+"]").prop("selected",true);
-            $("#disqus-change").click();
+            if (history.state.isMeta) {
+                $("#meta-thread").click();
+            } else {
+                $("#disqus-city").children("option[value="+history.state.city+"]").prop("selected",true);
+                $("#disqus-city").change();
+                $("#disqus-building").children("option[value="+history.state.building+"]").prop("selected",true);
+                $("#disqus-change").click();
+            }
         } else {
             $("#disqus-city").children("option:first").prop("selected",true);
             $("#disqus-city").change();

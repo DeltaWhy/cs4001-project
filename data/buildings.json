@@ -3,60 +3,60 @@
     "torre-realia": {
       "name": "Torre Realia BCN",
       "image": "Torre_Realia_BCN.jpg",
-      "hours": "12",
-      "area": "489,000 sq ft",
-      "sinks": "101",
-      "toilets": "100"
+      "hours": 12,
+      "area": 489000,
+      "sinks": 101,
+      "toilets": 100
     },
     "torre-mapfre": {
-      "area": "479,590 sq ft",
+      "area": 479590,
       "image": "Torre_Mapfre.JPG",
       "name": "Torre Mapfre",
-      "sinks": "100",
-      "toilets": "100",
-      "hours": "12"
+      "sinks": 100,
+      "toilets": 100,
+      "hours": 12
     },
     "agbar": {
       "name": "Torre Agbar",
-      "hours": "12",
+      "hours": 12,
       "image": "agbar.jpg",
-      "area": "50693",
-      "sinks": "200",
-      "toilets": "160"
+      "area": 50693,
+      "sinks": 200,
+      "toilets": 160
     },
     "torre-inbisa": {
       "name": "Torre Inbisa",
       "image": "Torre_Inbisa.JPG",
-      "hours": "12",
-      "area": "215,280 sq ft",
-      "sinks": "110",
-      "toilets": "100"
+      "hours": 12,
+      "area": 215280,
+      "sinks": 110,
+      "toilets": 100
     },
     "torre-sagrera": {
       "name": "Torre La Sagrera",
-      "hours": "12",
+      "hours": 12,
       "image": "torre-sagrera.jpg",
-      "area": "853,700 sq ft",
-      "sinks": "50",
-      "toilets": "100"
+      "area": 853700,
+      "sinks": 50,
+      "toilets": 100
     }
   },
   "atlanta": {
     "suntrust-plaza": {
       "name": "Sun Trust Plaza",
       "image": "SunTrustPlaza.jpg",
-      "hours": "12",
-      "area": "1,199,000 sq ft",
-      "sinks": "130",
-      "toilets": "100"
+      "hours": 12,
+      "area": 1199000,
+      "sinks": 130,
+      "toilets": 100
     },
     "atlantic-center": {
       "name": "One Atlantic Center",
       "image": "OneAtlanticCenter.jpg",
-      "hours": "12",
-      "area": "1,100,000 sq ft",
-      "sinks": "120",
-      "toilets": "100"
+      "hours": 12,
+      "area": 1100000,
+      "sinks": 120,
+      "toilets": 100
     },
     "one-ga-center": {
       "name": "One Georgia Center",
@@ -69,10 +69,10 @@
     "peachtree": {
       "name": "1100 Peachtree",
       "image": "1100_Peachtree.jpg",
-      "hours": "12",
-      "area": "618,000 sq ft",
-      "sinks": "119",
-      "toilets": "100"
+      "hours": 12,
+      "area": 618000,
+      "sinks": 119,
+      "toilets": 100
     },
     "gt-klaus": {
       "name": "Klaus Advanced Computing Building",
